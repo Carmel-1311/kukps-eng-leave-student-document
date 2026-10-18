@@ -1,0 +1,68 @@
+\section{การติดตั้งและตั้งค่าสภาพแวดล้อม}
+\subsection{สิ่งที่ต้องติดตั้ง}
+ต้องใช้ Node.js 20 ขึ้นไป, pnpm 10 และ MySQL หรือ MariaDB สองฐานข้อมูล
+\begin{lstlisting}
+corepack enable
+corepack prepare pnpm@10.0.0 --activate
+cd C:\Users\winne\Desktop\Web\kukps-eng-leave-request
+pnpm install
+\end{lstlisting}
+
+\subsection{การตั้งค่า API}
+สร้าง \code{apps/api/.env} ดังตัวอย่าง
+\begin{lstlisting}
+DATABASE_URL="mysql://user:password@host:3306/kukps-eng-leave-request-db"
+WAREHOUSE_DATABASE_URL="mysql://user:password@host:3306/kukps-eng-leave-request-wh"
+PORT=3001
+API_BASE_PATH=/kukps-eng-leave-request-api
+\end{lstlisting}
+ตัวแปรเพิ่มเติมที่ใช้ตามสภาพแวดล้อม ได้แก่
+\begin{itemize}
+  \item \code{ALL\_LOGIN\_API\_URL}: บริการเข้าสู่ระบบและตรวจ token
+  \item \code{PERSONNEL\_API\_URL}: บริการข้อมูลบุคลากรและสิทธิ์
+  \item \code{LEAVE\_REQUEST\_COMPONENT\_API\_URL}: บริการข้อมูลรายวิชาและอาจารย์
+  \item \code{PUBLIC\_LEAVE\_REQUEST\_TOKEN\_SECRET}: secret สำหรับ public token ซึ่งต้องตั้งใน production
+  \item \code{APP\_BASE\_URL}: URL สาธารณะของ web
+  \item \code{BASE\_STORAGE\_PATH}: ตำแหน่งเก็บหลักฐาน
+  \item \code{AUTO\_APPROVE\_RUN\_AT}: เวลารันงานอนุมัติอัตโนมัติ
+  \item \code{FAKE\_TOKEN}: token สำหรับการพัฒนาเท่านั้น
+\end{itemize}
+
+\newpage
+
+\subsection{การตั้งค่า Web}
+สร้าง \code{apps/web/.env.local}
+\begin{lstlisting}
+NEXT_PUBLIC_API_URL=http://127.0.0.1:3001/kukps-eng-leave-request-api
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_PATH=/kukps-eng-leave-request
+\end{lstlisting}
+ห้ามใส่ข้อมูลลับจริงในตัวแปรต่อไปนี้ เพราะค่าถูกส่งไปยัง browser \code{NEXT\_PUBLIC\_*}
+
+\subsection{ฐานข้อมูลและ Prisma}
+\begin{lstlisting}
+pnpm --filter api exec prisma db pull --schema prisma/schema.prisma
+pnpm --filter api exec prisma db pull --schema prisma/warehouse.prisma
+pnpm --filter api generate
+\end{lstlisting}
+ต้องระบุไฟล์ schema เสมอ ห้ามใช้เพียง \code{--schema prisma} ข้อมูลตัวอย่างแยกเป็นสองไฟล์ ได้แก่
+\begin{itemize}
+  \item \code{template/mock\_data.sql}: ข้อมูลตัวอย่างของฐานข้อมูลหลัก
+  \item \code{template/mock\_warehouse\_data.sql}: ข้อมูลตัวอย่างของคลังข้อมูล
+\end{itemize}
+
+\subsection{การรัน}
+\begin{lstlisting}
+pnpm dev
+pnpm dev:web
+pnpm dev:api
+\end{lstlisting}
+ค่าเริ่มต้นของบริการมีดังนี้
+\begin{itemize}
+  \item Web
+
+    \code{http://localhost:3000/kukps-eng-leave-request-web}
+  \item API
+
+    \code{http://localhost:3001/kukps-eng-leave-request-api}
+\end{itemize}

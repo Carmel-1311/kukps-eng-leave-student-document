@@ -1,0 +1,2053 @@
+{
+  "label": "wh",
+  "database": "kukps-eng-leave-request-wh",
+  "version": "9.7.2",
+  "tables": [
+    "dw_bridge_leave_subject_lecturer",
+    "dw_bridge_offering_lecturer",
+    "dw_bridge_person_department_term",
+    "dw_data_issue",
+    "dw_dim_curriculum",
+    "dw_dim_date",
+    "dw_dim_department",
+    "dw_dim_faculty",
+    "dw_dim_leave_type",
+    "dw_dim_offering",
+    "dw_dim_person",
+    "dw_dim_student",
+    "dw_dim_subject",
+    "dw_dim_term",
+    "dw_fact_approval_step",
+    "dw_fact_leave_request",
+    "dw_fact_leave_subject",
+    "dw_load_batch",
+    "dw_snapshot_student_term"
+  ],
+  "columns": [
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "name": "offering_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "name": "lecturer_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "name": "read_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_bridge_offering_lecturer",
+      "name": "offering_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_offering_lecturer",
+      "name": "lecturer_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "name": "person_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "name": "role_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "issue_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "entity_type",
+      "type": "varchar(60)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "issue_code",
+      "type": "varchar(80)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "detail",
+      "type": "varchar(1000)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_data_issue",
+      "name": "resolved_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "curriculum_code",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "revision_year_be",
+      "type": "smallint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "name": "program_type",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "calendar_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "calendar_year",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "calendar_month",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "iso_weekday",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "is_business_day",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "holiday_name_th",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_date",
+      "name": "calendar_version",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "department_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_department",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "faculty_code",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_faculty",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_leave_type",
+      "name": "leave_type_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_leave_type",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_leave_type",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_leave_type",
+      "name": "type_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "dw_dim_leave_type",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "offering_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "subject_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "section_code",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "section_kind",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "name": "owner_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "person_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "nontri_id",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "personnel_code",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "full_name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_person",
+      "name": "full_name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "student_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "student_code",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "prefix_th",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "full_name_th",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "full_name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_student",
+      "name": "entry_year_be",
+      "type": "smallint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "subject_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "subject_code",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "catalog_version",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "owner_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "name": "is_active",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "source_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "academic_year_ce",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "academic_year_be",
+      "type": "smallint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "term_code",
+      "type": "varchar(10)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "term_order",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "display_label_th",
+      "type": "varchar(100)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "start_date",
+      "type": "date",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_dim_term",
+      "name": "end_date",
+      "type": "date",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "approval_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "source_approval_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "approver_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "role_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "step_order",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "decision_status",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "decision_source",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "ready_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "decided_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "timing_quality",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "elapsed_seconds",
+      "type": "decimal(16,3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "business_days",
+      "type": "decimal(10,2)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "business_policy_version",
+      "type": "varchar(80)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "is_deleted",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "source_updated_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "loaded_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "source_request_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "student_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "leave_type_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "advisor_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "advisor_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "student_year",
+      "type": "tinyint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "start_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "end_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "request_days",
+      "type": "decimal(10,2)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "day_range",
+      "type": "varchar(12)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "status_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "declared_subject_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "snapshot_subject_entry_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "submitted_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "source_updated_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "source_hash",
+      "type": "char(64)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "is_deleted",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "loaded_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_fact_leave_subject",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_fact_leave_subject",
+      "name": "offering_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_fact_leave_subject",
+      "name": "affected_teaching_days",
+      "type": "decimal(10,2)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "pipeline_code",
+      "type": "varchar(80)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "started_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "finished_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "status",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "source_watermark_from",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "source_watermark_to",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "loaded_rows",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_load_batch",
+      "name": "rejected_rows",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "student_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "advisor_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "student_year",
+      "type": "tinyint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "roster_status",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "captured_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "approval_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "source_approval_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "approver_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "role_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "step_order",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "decision_status",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "decision_source",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "ready_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "decided_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "timing_quality",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "elapsed_seconds",
+      "type": "decimal(16,3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "business_days",
+      "type": "decimal(10,2)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "business_policy_version",
+      "type": "varchar(80)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "is_deleted",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "source_updated_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "loaded_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "advisor_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "request_status",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_approval_duration",
+      "name": "elapsed_days",
+      "type": "decimal(21,7)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "source_request_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "student_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "leave_type_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "advisor_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "advisor_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "student_year",
+      "type": "tinyint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "start_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "end_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "request_days",
+      "type": "decimal(10,2)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "day_range",
+      "type": "varchar(12)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "status_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "declared_subject_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "snapshot_subject_entry_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "submitted_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "source_updated_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "source_hash",
+      "type": "char(64)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "is_deleted",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "loaded_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "academic_year_ce",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "academic_year_be",
+      "type": "smallint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "term_code",
+      "type": "varchar(10)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "term_order",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "term_label",
+      "type": "varchar(100)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "student_code",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "student_name",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "leave_type_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request",
+      "name": "student_year_group",
+      "type": "varchar(5)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "request_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "source_system",
+      "type": "varchar(40)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "source_request_id",
+      "type": "varchar(128)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "student_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "term_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "leave_type_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "faculty_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "curriculum_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "advisor_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "advisor_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "student_year",
+      "type": "tinyint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "start_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "end_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "request_days",
+      "type": "decimal(10,2)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "day_range",
+      "type": "varchar(12)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "status_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "declared_subject_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "snapshot_subject_entry_count",
+      "type": "int unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "submitted_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "source_updated_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "source_hash",
+      "type": "char(64)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "is_deleted",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "loaded_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "batch_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "academic_year_ce",
+      "type": "smallint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "academic_year_be",
+      "type": "smallint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "term_code",
+      "type": "varchar(10)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "term_order",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "term_label",
+      "type": "varchar(100)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "student_code",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "student_name",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "leave_type_code",
+      "type": "varchar(30)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "student_year_group",
+      "type": "varchar(5)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "offering_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "affected_teaching_days",
+      "type": "decimal(10,2)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "subject_key",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "section_code",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "section_kind",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "subject_department_key",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "subject_code",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "dw_v_request_subject",
+      "name": "subject_name",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    }
+  ],
+  "fks": [
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "column_name": "request_key",
+      "ref_table": "dw_fact_leave_subject",
+      "ref_column": "request_key"
+    },
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "column_name": "offering_key",
+      "ref_table": "dw_fact_leave_subject",
+      "ref_column": "offering_key"
+    },
+    {
+      "table_name": "dw_bridge_leave_subject_lecturer",
+      "column_name": "lecturer_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_bridge_offering_lecturer",
+      "column_name": "offering_key",
+      "ref_table": "dw_dim_offering",
+      "ref_column": "offering_key"
+    },
+    {
+      "table_name": "dw_bridge_offering_lecturer",
+      "column_name": "lecturer_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "column_name": "person_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "column_name": "department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_bridge_person_department_term",
+      "column_name": "term_key",
+      "ref_table": "dw_dim_term",
+      "ref_column": "term_key"
+    },
+    {
+      "table_name": "dw_data_issue",
+      "column_name": "batch_key",
+      "ref_table": "dw_load_batch",
+      "ref_column": "batch_key"
+    },
+    {
+      "table_name": "dw_dim_curriculum",
+      "column_name": "department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_dim_department",
+      "column_name": "faculty_key",
+      "ref_table": "dw_dim_faculty",
+      "ref_column": "faculty_key"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "column_name": "subject_key",
+      "ref_table": "dw_dim_subject",
+      "ref_column": "subject_key"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "column_name": "term_key",
+      "ref_table": "dw_dim_term",
+      "ref_column": "term_key"
+    },
+    {
+      "table_name": "dw_dim_offering",
+      "column_name": "owner_department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_dim_subject",
+      "column_name": "owner_department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "column_name": "request_key",
+      "ref_table": "dw_fact_leave_request",
+      "ref_column": "request_key"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "column_name": "approver_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_fact_approval_step",
+      "column_name": "batch_key",
+      "ref_table": "dw_load_batch",
+      "ref_column": "batch_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "student_key",
+      "ref_table": "dw_dim_student",
+      "ref_column": "student_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "term_key",
+      "ref_table": "dw_dim_term",
+      "ref_column": "term_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "leave_type_key",
+      "ref_table": "dw_dim_leave_type",
+      "ref_column": "leave_type_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "faculty_key",
+      "ref_table": "dw_dim_faculty",
+      "ref_column": "faculty_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "curriculum_key",
+      "ref_table": "dw_dim_curriculum",
+      "ref_column": "curriculum_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "advisor_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "advisor_department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_fact_leave_request",
+      "column_name": "batch_key",
+      "ref_table": "dw_load_batch",
+      "ref_column": "batch_key"
+    },
+    {
+      "table_name": "dw_fact_leave_subject",
+      "column_name": "request_key",
+      "ref_table": "dw_fact_leave_request",
+      "ref_column": "request_key"
+    },
+    {
+      "table_name": "dw_fact_leave_subject",
+      "column_name": "offering_key",
+      "ref_table": "dw_dim_offering",
+      "ref_column": "offering_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "student_key",
+      "ref_table": "dw_dim_student",
+      "ref_column": "student_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "term_key",
+      "ref_table": "dw_dim_term",
+      "ref_column": "term_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "department_key",
+      "ref_table": "dw_dim_department",
+      "ref_column": "department_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "curriculum_key",
+      "ref_table": "dw_dim_curriculum",
+      "ref_column": "curriculum_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "advisor_key",
+      "ref_table": "dw_dim_person",
+      "ref_column": "person_key"
+    },
+    {
+      "table_name": "dw_snapshot_student_term",
+      "column_name": "batch_key",
+      "ref_table": "dw_load_batch",
+      "ref_column": "batch_key"
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "label": "leave-com",
+  "database": "leave-request-components",
+  "version": "8.0.44",
+  "tables": [
+    "_prisma_migrations",
+    "advisor_student",
+    "subject_section_lecturers",
+    "subject_sections",
+    "subjects"
+  ],
+  "columns": [
+    {
+      "table_name": "_prisma_migrations",
+      "name": "id",
+      "type": "varchar(36)",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "checksum",
+      "type": "varchar(64)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "finished_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "migration_name",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "logs",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "rolled_back_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "started_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "applied_steps_count",
+      "type": "int unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "advisor_student",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "advisor_student",
+      "name": "advisor_code",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "advisor_student",
+      "name": "student_code",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "advisor_student",
+      "name": "department",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "subject_section_lecturers",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "subject_section_lecturers",
+      "name": "subject_section_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "subject_section_lecturers",
+      "name": "lecturer_code",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "subject_section_lecturers",
+      "name": "lecturer_name",
+      "type": "varchar(70)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "subject_sections",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "subject_sections",
+      "name": "subject_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "subject_sections",
+      "name": "section",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "subject_sections",
+      "name": "schedule_text",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "subject_sections",
+      "name": "schedule",
+      "type": "json",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "subjects",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "subjects",
+      "name": "subject_code",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "subjects",
+      "name": "subject_name",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    }
+  ],
+  "fks": [
+    {
+      "table_name": "subject_section_lecturers",
+      "column_name": "subject_section_id",
+      "ref_table": "subject_sections",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "subject_sections",
+      "column_name": "subject_id",
+      "ref_table": "subjects",
+      "ref_column": "id"
+    }
+  ]
+}

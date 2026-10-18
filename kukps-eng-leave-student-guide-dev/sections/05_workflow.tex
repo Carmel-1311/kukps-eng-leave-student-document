@@ -1,0 +1,46 @@
+\section{กฎคำร้องและกระบวนการอนุมัติ}
+\subsection{เงื่อนไขของคำร้อง}
+\begin{itemize}
+  \item ประเภทการลาคือ ลาป่วย หรือ ลากิจ
+  \item ต้องกรอกเหตุผล วันที่เริ่ม วันที่สิ้นสุด และเลือกรายวิชาอย่างน้อยหนึ่งวิชา
+  \item วันสิ้นสุดต้องไม่ก่อนวันเริ่ม และจำนวนวันทำการต้องมากกว่าศูนย์
+  \item เบอร์โทรศัพท์ที่กรอกใหม่ต้องมี 10 หลัก
+  \item หากไม่ใช้ที่อยู่เดิม ต้องกรอกรายละเอียดและเลือกรหัสไปรษณีย์
+  \item ลาป่วยบังคับแนบหลักฐาน รองรับ JPG, JPEG, PNG, WEBP และ PDF ไม่เกิน 2 MB
+\end{itemize}
+
+\subsection{เส้นทางอนุมัติ}
+เมื่อสร้างคำร้อง ระบบอ่านข้อมูลนิสิต อาจารย์ที่ปรึกษา และโครงสร้างภาควิชา จากนั้นสร้างเส้นทางอนุมัติตามลำดับดังนี้
+\begin{enumerate}
+  \item \role{ADVISOR}: อาจารย์ที่ปรึกษา
+  \item \role{DEPARTMENT\_HEAD}: หัวหน้าภาควิชา
+  \item \role{ASSOCIATE\_DEAN}: รองคณบดี เฉพาะเมื่อจำนวนวันลามากกว่า 15 วัน
+\end{enumerate}
+
+หากไม่พบผู้อนุมัติแม้แต่หนึ่งราย ระบบจะไม่สร้างคำร้องและแสดงข้อความต่อไปนี้
+\begin{center}
+  \code{No approval route found for this student}
+\end{center}
+
+\subsection{สถานะ}
+\begin{table}[htbp]\centering
+  \begin{tabularx}{\textwidth}{>{\ttfamily\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}p{3.2cm}X}\toprule
+    \tableheader{สถานะ} & \tableheader{ความหมาย} \\\midrule
+    PENDING & คำร้องกำลังรอการพิจารณา \\
+    WAITING & ขั้นยังทำรายการไม่ได้เพราะรอขั้นก่อน \\
+    CURRENT & ขั้นปัจจุบัน ผู้มีสิทธิ์พิจารณาได้ \\
+    APPROVED & ขั้นหรือคำร้องผ่านแล้ว \\
+    REJECTED & ไม่อนุมัติและ workflow สิ้นสุด \\\bottomrule
+  \end{tabularx}
+  \caption{สถานะคำร้องและขั้นอนุมัติ}
+\end{table}
+การเปลี่ยนสถานะเป็นไปตามกฎต่อไปนี้
+\begin{itemize}
+  \item ขั้นแรกเริ่มต้นด้วยสถานะ \code{CURRENT}
+  \item เมื่ออนุมัติ ระบบจะเลื่อนขั้นถัดไปเป็น \code{CURRENT}
+  \item หากไม่มีขั้นถัดไป คำร้องจะเป็น \code{APPROVED}
+  \item หากขั้นใดไม่อนุมัติ คำร้องจะเป็น \code{REJECTED} ทันที
+\end{itemize}
+
+\subsection{การอนุมัติอัตโนมัติ}
+ระบบมีกฎอนุมัติอัตโนมัติแยกตาม role และงานตามเวลา ผลมีสถานะเทียบเท่าการอนุมัติโดยผู้ใช้ จึงต้องกำหนดตามนโยบาย ทดสอบแยกจาก production และติดตาม log หลังเปลี่ยนค่า

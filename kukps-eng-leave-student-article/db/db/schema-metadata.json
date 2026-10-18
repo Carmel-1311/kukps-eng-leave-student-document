@@ -1,0 +1,1090 @@
+{
+  "label": "db",
+  "database": "kukps-eng-leave-request",
+  "version": "9.7.2",
+  "tables": [
+    "_prisma_migrations",
+    "academic_setting",
+    "academic_term",
+    "account",
+    "approval",
+    "business_calendar_day",
+    "district",
+    "faculty",
+    "leave_request",
+    "leave_request_lecturer_read",
+    "leave_type",
+    "major",
+    "province",
+    "student",
+    "student_subject_shortcut",
+    "sub_district",
+    "user_auto_approve_rule",
+    "users",
+    "zipcode"
+  ],
+  "columns": [
+    {
+      "table_name": "_prisma_migrations",
+      "name": "id",
+      "type": "varchar(36)",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "checksum",
+      "type": "varchar(64)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "finished_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "migration_name",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "logs",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "rolled_back_at",
+      "type": "datetime(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "started_at",
+      "type": "datetime(3)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "_prisma_migrations",
+      "name": "applied_steps_count",
+      "type": "int unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "academic_setting",
+      "name": "id",
+      "type": "tinyint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "academic_setting",
+      "name": "current_academic_term_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "academic_setting",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "academic_setting",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "academic_term",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "academic_term",
+      "name": "academic_year",
+      "type": "year",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "academic_term",
+      "name": "term",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "academic_term",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "academic_term",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "account",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "account",
+      "name": "nontri_id",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "account",
+      "name": "email",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "account",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "account",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "approval",
+      "name": "leave_request_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "approval",
+      "name": "approver_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "approval",
+      "name": "approver_role",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "step",
+      "type": "int",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "decision_status",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "approval",
+      "name": "reason",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "updated_at",
+      "type": "timestamp(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "activated_at",
+      "type": "timestamp(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "decided_at",
+      "type": "timestamp(3)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "decision_source",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "decided_by_nontri_id",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "decided_by_name",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "approval",
+      "name": "is_delegated",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "calendar_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "is_working_day",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "name",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "business_calendar_day",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "district",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "district",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "district",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "district",
+      "name": "province_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "district",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "district",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "faculty",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "faculty",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "faculty",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "faculty",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "faculty",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "faculty",
+      "name": "faculty_code",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "leave_type_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "student_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "academic_term_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "start_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "end_date",
+      "type": "date",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "total_days",
+      "type": "int",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "affected_subject_count",
+      "type": "int",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "status",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request",
+      "name": "json_file_path",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "evidence_file_path",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "leave_request_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "read_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "subject_code",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "sec",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "name": "lecturer_code",
+      "type": "varchar(50)",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "leave_type",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "leave_type",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "leave_type",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "major",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "major",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "major",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "major",
+      "name": "faculty_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "major",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "major",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "major",
+      "name": "major_code",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "province",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "province",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "province",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "province",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "province",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "student",
+      "name": "account_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "student",
+      "name": "prefix",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "full_name_th",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "full_name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "year_code",
+      "type": "varchar(10)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "major_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "student",
+      "name": "address_detail",
+      "type": "text",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "zipcode_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "student",
+      "name": "phone",
+      "type": "varchar(20)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "student_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "subject_code",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "subject_name",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "section_id",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "section",
+      "type": "varchar(20)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "schedule_text",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "name": "schedule",
+      "type": "json",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "sub_district",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "sub_district",
+      "name": "name_th",
+      "type": "varchar(255)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "sub_district",
+      "name": "name_en",
+      "type": "varchar(255)",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "sub_district",
+      "name": "district_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "sub_district",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "sub_district",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "account_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "role",
+      "type": "varchar(50)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "enabled",
+      "type": "tinyint(1)",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "after_days",
+      "type": "int unsigned",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "users",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "users",
+      "name": "account_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "UNI"
+    },
+    {
+      "table_name": "users",
+      "name": "major_id",
+      "type": "bigint unsigned",
+      "nullable": "YES",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "users",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "users",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "zipcode",
+      "name": "id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "PRI"
+    },
+    {
+      "table_name": "zipcode",
+      "name": "zipcode",
+      "type": "varchar(10)",
+      "nullable": "NO",
+      "column_key": ""
+    },
+    {
+      "table_name": "zipcode",
+      "name": "sub_district_id",
+      "type": "bigint unsigned",
+      "nullable": "NO",
+      "column_key": "MUL"
+    },
+    {
+      "table_name": "zipcode",
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    },
+    {
+      "table_name": "zipcode",
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": "YES",
+      "column_key": ""
+    }
+  ],
+  "fks": [
+    {
+      "table_name": "academic_setting",
+      "column_name": "current_academic_term_id",
+      "ref_table": "academic_term",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "approval",
+      "column_name": "leave_request_id",
+      "ref_table": "leave_request",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "approval",
+      "column_name": "approver_id",
+      "ref_table": "users",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "district",
+      "column_name": "province_id",
+      "ref_table": "province",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "leave_request",
+      "column_name": "academic_term_id",
+      "ref_table": "academic_term",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "leave_request",
+      "column_name": "leave_type_id",
+      "ref_table": "leave_type",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "leave_request",
+      "column_name": "student_id",
+      "ref_table": "student",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "leave_request_lecturer_read",
+      "column_name": "leave_request_id",
+      "ref_table": "leave_request",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "major",
+      "column_name": "faculty_id",
+      "ref_table": "faculty",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "student",
+      "column_name": "account_id",
+      "ref_table": "account",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "student",
+      "column_name": "major_id",
+      "ref_table": "major",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "student",
+      "column_name": "zipcode_id",
+      "ref_table": "zipcode",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "student_subject_shortcut",
+      "column_name": "student_id",
+      "ref_table": "student",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "sub_district",
+      "column_name": "district_id",
+      "ref_table": "district",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "user_auto_approve_rule",
+      "column_name": "account_id",
+      "ref_table": "account",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "users",
+      "column_name": "account_id",
+      "ref_table": "account",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "users",
+      "column_name": "major_id",
+      "ref_table": "major",
+      "ref_column": "id"
+    },
+    {
+      "table_name": "zipcode",
+      "column_name": "sub_district_id",
+      "ref_table": "sub_district",
+      "ref_column": "id"
+    }
+  ]
+}

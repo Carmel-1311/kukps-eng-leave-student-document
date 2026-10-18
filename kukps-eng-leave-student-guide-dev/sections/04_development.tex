@@ -1,0 +1,56 @@
+\section{แนวทางพัฒนา ทดสอบ และนำขึ้นใช้งาน}
+\subsection{แนวทางเพิ่ม Feature}
+Backend ควรพัฒนาตามลำดับ DTO, service, controller, module และ schema/migration เมื่อจำเป็น แล้วทดสอบ validation, authentication, authorization และกรณีผิดพลาด Frontend ควรเพิ่ม type, API function หรือ hook, component/page และสถานะ loading, error, empty พร้อมตรวจ role และ responsive layout
+
+เมื่อแก้ approval route ต้องรักษา snapshot ของคำร้องเก่า คำร้องที่สร้างแล้วไม่ควรเปลี่ยนเส้นทางย้อนหลังเพราะ master data ปัจจุบันเปลี่ยน
+
+\subsection{API สำคัญ}
+ทุก path อยู่ภายใต้ \code{API\_BASE\_PATH}
+\begin{table}[htbp]\centering
+  \begin{tabularx}{\textwidth}{>{\ttfamily\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}p{2cm} >{\ttfamily\fontsize{12pt}{15pt}\selectfont\raggedright\arraybackslash}p{9cm} X}\toprule
+    \tableheader{Method} & \tableheader{Path} & \tableheader{หน้าที่} \\\midrule
+    POST & /account/login-profile & อ่านหรือสร้าง profile หลัง login \\
+    GET & /student/by-nontri/:id & อ่านข้อมูลนิสิต \\
+    PATCH & /student/:id/contact & แก้ข้อมูลติดต่อ \\
+    POST & /leave-request & สร้างคำร้อง \\
+    POST & /leave-request/upload/evidence/:id & อัปโหลดหลักฐาน \\
+    GET & /leave-request/:id & อ่านรายละเอียด \\
+    GET & /leave-request/:id/approval-flow & อ่านขั้นอนุมัติ \\
+    \bottomrule
+  \end{tabularx}
+  \caption{API ในกระบวนการหลัก}
+\end{table}
+
+\begin{table}[htbp]\centering
+  \begin{tabularx}{\textwidth}{>{\ttfamily\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}p{2cm} >{\ttfamily\fontsize{12pt}{15pt}\selectfont\raggedright\arraybackslash}p{9cm} X}\toprule
+    \tableheader{Method} & \tableheader{Path} & \tableheader{หน้าที่} \\\midrule
+    POST & /leave-request/:id/review & อนุมัติหรือไม่อนุมัติ \\
+    POST & /leave-request/:id/lecturer-read & บันทึกการอ่านของอาจารย์ \\
+    GET & /leave-request/:id/document & อ่านข้อมูลเอกสาร \\
+    GET & /leave-request/public/:token & อ่านข้อมูลผ่าน signed token \\
+    GET, PUT & /academic-setting/* & จัดการภาคการศึกษา \\
+    GET, PUT & /auto-approve-setting/rules/* & จัดการกฎอนุมัติอัตโนมัติ \\
+    GET & /warehouse-dashboard/* & อ่านข้อมูลรายงาน \\\bottomrule
+  \end{tabularx}
+  \caption{API ในกระบวนการหลัก (ต่อ)}
+\end{table}
+
+ใช้ Postman collection ต่อไปนี้เป็นฐานทดสอบ
+\begin{center}
+  \code{apps/api/postman/}\quad
+  \code{kukps-eng-leave-request-api.postman\_collection.json}
+\end{center}
+จากนั้นตั้ง base URL ให้รวม prefix ตรงกับ runtime
+
+\subsection{ตรวจคุณภาพและ Build}
+\begin{lstlisting}
+pnpm lint
+pnpm build
+pnpm build:web
+pnpm build:api
+docker build -f apps/web/Dockerfile -t kukps-eng-leave-request-web .
+docker build -f apps/api/Dockerfile -t kukps-eng-leave-request-api .
+\end{lstlisting}
+ควรทดสอบ login และ route ของทุก role, กระบวนการ create--approve/reject--lecturer read และไฟล์ JPG, JPEG, PNG, WEBP, PDF ทั้งกรณีผ่านและเกิน 2 MB ระบบไม่มี Docker Compose จึง deploy web, API และฐานข้อมูลแยกกัน
+
+API source ปัจจุบันตั้ง CORS เป็น wildcard แม้ README เดิมกล่าวถึง \code{CORS\_ORIGIN} ใน production ควรแก้ \code{apps/api/src/main.ts} ให้จำกัด origin ที่อนุญาต

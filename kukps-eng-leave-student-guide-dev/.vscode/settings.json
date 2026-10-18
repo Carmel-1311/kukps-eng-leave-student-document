@@ -1,0 +1,30 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex-build",
+      "command": "C:/Users/winne/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {
+        "PATH": "C:\\Users\\winne\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64;C:\\Tools\\tex-fmt;C:\\Windows\\System32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0"
+      }
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "XeLaTeX (build folder)",
+      "tools": [
+        "xelatex-build",
+        "xelatex-build"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.formatting.latex": "tex-fmt"
+}

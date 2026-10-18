@@ -1,0 +1,59 @@
+# Generated documents, previews, and local backups
+/build/
+/main.pdf
+
+# Reference article kept locally; not part of this manuscript
+/article/
+
+# LaTeX intermediate files (also covers accidental builds in source folders)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.dvi
+*.idx
+*.ind
+*.ilg
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.latexmk
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+*.tmp
+~$*
+
+# Personal VS Code state; share only project configuration
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local.json

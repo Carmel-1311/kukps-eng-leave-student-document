@@ -1,0 +1,109 @@
+% Compile with XeLaTeX. Fonts are bundled; no system font installation required.
+\documentclass{article}
+\usepackage[paperwidth=420mm,paperheight=594mm,margin=18mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{BaiJamjuree}[Path=font/Bai_Jamjuree/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\newfontfamily\semibold{BaiJamjuree-SemiBold.ttf}[Path=font/Bai_Jamjuree/]
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage{xcolor,graphicx,enumitem}
+% Absolute placement using the LaTeX shipout hook (no extra layout package).
+\long\def\placeposterblock#1,#2\stop#3#4{%
+  \AddToHook{shipout/foreground}{\setlength{\unitlength}{1mm}%
+    \put(#1,-#2){\raisebox{-\height}{
+        \begin{minipage}[t]{#3mm}#4
+\end{minipage}}}}}
+\NewDocumentEnvironment{textblock}{m r() +b}{\placeposterblock#2\stop{#1}{#3}}{}
+\definecolor{green}{HTML}{000000}
+\definecolor{ink}{HTML}{000000}
+\definecolor{soft}{HTML}{FAFAFA}
+\definecolor{line}{HTML}{AABDB3}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[enumerate]{leftmargin=8mm,itemsep=3pt,topsep=4pt,parsep=0pt}
+\newcommand{\heading}[1]{\par\vspace{5mm}{\color{green}\fontsize{23}{30}\selectfont\bfseries #1\par}\vspace{3mm}}
+\newcommand{\subhead}[1]{{\fontsize{20}{26}\selectfont\semibold\color{green}#1\par}}
+% Images are loaded automatically when a matching file is placed in images/.
+\newcommand{\picturebox}[5][]{%
+  \par\begingroup\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.6pt}%
+  \IfFileExists{images/#2}{%
+    \parbox[c][#3][c]{\linewidth}{\centering\includegraphics[#1,width=\linewidth,height=#3,keepaspectratio]{images/#2}}%
+  }{%
+    \fcolorbox{line}{soft}{\parbox[c][#3][c]{\dimexpr\linewidth-1.2pt\relax}{\centering
+        {\color{green}\fontsize{20}{27}\selectfont\semibold #4\par}\vspace{2mm}
+    {\color{ink}\fontsize{14}{20}\selectfont\texttt{#2}\par}}}%
+  }\par\endgroup\vspace{1mm}%
+{\centering\fontsize{15}{20}\selectfont #5\par}\vspace{3mm}}
+\begin{document}
+\color{ink}\fontsize{17}{24}\selectfont
+% Outer border, matching the supplied academic poster.
+\AddToHook{shipout/foreground}{\setlength{\unitlength}{1mm}\put(14,-584){\framebox(392,574){}}\put(14,-96){\line(1,0){392}}}
+\begin{textblock}{55}(22,20)
+  \IfFileExists{images/logo.png}{\includegraphics[width=53mm,height=60mm,keepaspectratio]{images/logo.png}}{\fcolorbox{line}{soft}{\parbox[c][56mm][c]{51mm}{\centering\fontsize{18}{25}\selectfont โลโก้\\มหาวิทยาลัย\\[3mm]\fontsize{12}{17}\selectfont logo.png}}}
+\end{textblock}
+\begin{textblock}{312}(85,24)
+  {\bfseries\fontsize{31}{41}\selectfont\mbox{ระบบลานิสิตสำหรับคณะวิศวกรรมศาสตร์ กำแพงแสน}\par}
+  \vspace{3mm}
+  {\fontsize{18}{26}\selectfont\mbox{Student Leave Management System for the Faculty of Engineering at Kamphaeng Saen}\par}
+  \vspace{4mm}\hrule\vspace{3mm}
+  {\fontsize{18}{25}\selectfont จิรภัทร แซ่ลี้ และ กานตภัท อาจหาญ\par}
+  {\fontsize{16}{23}\selectfont ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ กำแพงแสน\\มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตกำแพงแสน\par}
+  {\fontsize{16}{23}\selectfont อาจารย์ที่ปรึกษา: อ.ธีรวัฒน์ หวายฤทธิ์ อาจารย์ที่ปรึกษาหลัก และ ผศ.ดร.วรัญญา อรรถเสนา อาจารย์ที่ปรึกษารอง\par}
+\end{textblock}
+\begin{textblock}{366}(27,104)
+  {\centering\bfseries\fontsize{23}{30}\selectfont บทคัดย่อ\par}\vspace{4mm}
+  \hspace*{8mm}โครงงานนี้พัฒนาเว็บแอปพลิเคชันระบบลานิสิต เพื่อรวมการยื่นคำขอ การแนบหลักฐาน การพิจารณาตามลำดับ และการติดตามสถานะไว้ในระบบเดียว พร้อมเชื่อมข้อมูลรายวิชา ผู้สอน และที่ปรึกษา และจัดทำรายงานจากคลังข้อมูลตามสิทธิ์ผู้ใช้งาน ผลการตรวจโครงสร้างพบองค์ประกอบรองรับกระบวนการดังกล่าว โดยยังต้องทดสอบครบวงจรและประเมินกับผู้ใช้จริงเพิ่มเติม
+\end{textblock}
+\begin{textblock}{179}(27,158)
+  \heading{วัตถุประสงค์}
+  \begin{enumerate}
+    \item พัฒนาระบบยื่นคำขอ แนบหลักฐาน และติดตามสถานะผ่านเว็บ
+    \item สนับสนุนการพิจารณาตามลำดับและสิทธิ์ของผู้รับผิดชอบ
+    \item จัดการข้อมูลอ้างอิงและจัดทำรายงานการลาตามขอบเขตผู้ใช้งาน
+  \end{enumerate}
+  \heading{ประโยชน์ที่คาดว่าจะได้รับ}
+  \begin{enumerate}
+    \item ติดตามคำขอและประวัติการลาได้สะดวก
+    \item รวมข้อมูลและผลพิจารณาไว้ในระบบเดียว
+    \item มีข้อมูลสรุปประกอบการติดตามการลา
+  \end{enumerate}
+  \heading{การออกแบบและพัฒนาระบบ}
+  \picturebox{architecture.png}{90mm}{ภาพรวมการทำงานของระบบ}{ภาพที่ 1 องค์ประกอบและการเชื่อมข้อมูลของระบบ}
+  {\fontsize{17}{24}\selectfont ระบบแยกหน้าเว็บ บริการประมวลผล และฐานข้อมูล เชื่อมข้อมูลรายวิชา ผู้สอน และที่ปรึกษา พร้อมจัดทำรายงานผ่าน ETL และคลังข้อมูล\par}
+  \vspace{3mm}
+  {\fontsize{16}{23}\selectfont\bfseries เทคโนโลยีหลัก\par}
+  \vspace{2mm}
+  \begingroup
+  \setlength{\fboxsep}{2mm}
+  \newcommand{\techbox}[2]{%
+    \fcolorbox{line}{soft}{
+      \begin{minipage}[c][29mm][c]{36mm}\centering
+        \IfFileExists{images/#1.png}{\includegraphics[width=23mm,height=17mm,keepaspectratio]{images/#1.png}}{\parbox[c][17mm][c]{30mm}{\centering\fontsize{12}{16}\selectfont โลโก้}}
+        \par\vspace{1mm}{\fontsize{15}{20}\selectfont\semibold #2\par}
+  \end{minipage}}}
+  \noindent\techbox{nextjs}{Next.js}\hfill\techbox{nestjs}{NestJS}\hfill\techbox{react}{React}\hfill\techbox{typescript}{TypeScript}\par
+  \vspace{3mm}
+  \noindent\techbox{prisma}{Prisma}\hfill\techbox{mysql}{MySQL}\hfill\techbox{tailwind}{Tailwind CSS}\hfill\techbox{rechart}{Recharts}\par
+  \endgroup
+  \heading{สรุปผลและข้อเสนอแนะ}
+  ระบบรองรับการยื่น พิจารณา ติดตาม และรายงานตามบทบาท ควรทดสอบครบวงจร เติมข้อมูลอ้างอิง กำหนดรอบปรับปรุงรายงาน และประเมินกับผู้ใช้จริง ผลด้านการลดเวลาและความพึงพอใจยังต้องประเมินเพิ่มเติม
+\end{textblock}
+\begin{textblock}{179}(222,163)
+  {\centering\bfseries\fontsize{23}{30}\selectfont การพัฒนาระบบ\par}\vspace{6mm}
+  % Source screenshots: 1920 x 1032 at 96 dpi. Hide browser chrome only.
+  \picturebox[trim=30.75bp 0bp 0bp 73.5bp,clip]{student-request.png}{77mm}{แบบฟอร์มยื่นคำขอ}{ภาพที่ 2 การยื่นคำขอลา}
+  \picturebox[trim=30.75bp 0bp 0bp 73.5bp,clip]{approval-flow.png}{77mm}{ติดตามสถานะ}{ภาพที่ 3 ลำดับพิจารณา}
+  \picturebox[trim=30.75bp 0bp 0bp 73.5bp,clip]{advisor-review.png}{77mm}{หน้าพิจารณาคำขอ}{ภาพที่ 4 รายการรอพิจารณา}
+  \picturebox[trim=30.75bp 0bp 0bp 73.5bp,clip]{warehouse-report.png}{77mm}{รายงานการลา}{ภาพที่ 5 รายงาน (ข้อมูลจำลอง)}
+\end{textblock}
+\begin{textblock}{176}(222,544)
+  {\bfseries\fontsize{20}{27}\selectfont สอบถามข้อมูลเพิ่มเติม\par}
+  {\fontsize{13}{17}\selectfont\setlength{\parskip}{0pt}\raggedleft
+    สาขาวิชาวิศวกรรมคอมพิวเตอร์ อาคาร 8\\
+    คณะวิศวกรรมศาสตร์ กำแพงแสน มหาวิทยาลัยเกษตรศาสตร์\\
+    วิทยาเขตกำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140\\
+  โทรศัพท์: 034-352853 หรือ 034-281074 ต่อ 7523 โทรสาร: 034-351842\par}
+\end{textblock}
+\null
+\end{document}

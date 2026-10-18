@@ -1,0 +1,124 @@
+\documentclass[17pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+
+\geometry{letterpaper,margin=1in,headheight=14pt,footskip=0.5in}
+\setmainfont[Path=fonts/,BoldFont=THSarabun-Bold.ttf,ItalicFont=THSarabun-Italic.ttf,BoldItalicFont=THSarabun-BoldItalic.ttf]{THSarabun.ttf}
+\setmonofont[Path=fonts/SourceCodePro/,BoldFont=SourceCodePro-SemiBold.ttf,ItalicFont=SourceCodePro-Italic.ttf,BoldItalicFont=SourceCodePro-SemiBoldItalic.ttf]{SourceCodePro-Regular.ttf}
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip=0pt plus 0.8pt
+\XeTeXlinebreakpenalty=100
+\tolerance=1800
+\emergencystretch=1.5em
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{16pt}{18.4pt}}
+\makeatother
+\normalsize
+\setstretch{1.15}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{itemsep=0pt,topsep=3pt,parsep=0pt}
+\setlist[enumerate]{itemsep=0pt,topsep=3pt,parsep=0pt}
+\renewcommand{\contentsname}{สารบัญ}
+\renewcommand{\listfigurename}{สารบัญภาพ}
+\renewcommand{\listtablename}{สารบัญตาราง}
+\renewcommand{\figurename}{ภาพที่}
+\renewcommand{\tablename}{ตารางที่}
+\captionsetup{labelsep=space,font=normalsize}
+\captionsetup[table]{position=bottom,skip=6pt}
+\renewcommand{\cftsecpresnum}{บทที่~}
+\setlength{\cftsecnumwidth}{4.2em}
+\renewcommand{\cftfigpresnum}{ภาพที่~}
+\setlength{\cftfignumwidth}{4.2em}
+\renewcommand{\cfttabpresnum}{ตารางที่~}
+\setlength{\cfttabnumwidth}{4.6em}
+\renewcommand{\cftsecdotsep}{1.5}
+\renewcommand{\cftsubsecdotsep}{1.5}
+\renewcommand{\cftfigdotsep}{1.5}
+\renewcommand{\cfttabdotsep}{1.5}
+\renewcommand{\cfttoctitlefont}{\hfill\bfseries\fontsize{18pt}{22pt}\selectfont}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\bfseries\fontsize{18pt}{22pt}\selectfont}
+\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\bfseries\fontsize{18pt}{22pt}\selectfont}
+\renewcommand{\cftafterlottitle}{\hfill}
+\titleformat{\section}[block]{\centering\bfseries\fontsize{18pt}{22pt}\selectfont}{บทที่ \thesection}{0.6em}{}
+\titleformat{\subsection}{\bfseries\fontsize{18pt}{21pt}\selectfont}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\bfseries\fontsize{18pt}{21pt}\selectfont}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{0pt}{1.2\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.8\baselineskip}{0.25\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.6\baselineskip}{0.2\baselineskip}
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\rfoot{\thepage}}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={คู่มือระบบคำร้องขอลานิสิต}}
+\definecolor{codebackground}{HTML}{F4F4F5}
+\definecolor{codeborder}{HTML}{D1D5DB}
+\definecolor{codetext}{HTML}{27272A}
+\RenewDocumentCommand{\texttt}{m}{%
+  \tcbox[
+    on line,
+    nobeforeafter,
+    colback=codebackground,
+    colframe=codeborder,
+    boxrule=0.35pt,
+    arc=2pt,
+    boxsep=0pt,
+    left=2.5pt,
+    right=2.5pt,
+    top=1.2pt,
+    bottom=1.2pt
+  ]{\ttfamily\fontsize{13pt}{16pt}\selectfont\color{codetext}#1}%
+}
+\lstset{basicstyle=\ttfamily\fontsize{9pt}{12pt}\selectfont\color{codetext},backgroundcolor=\color{codebackground},frame=single,rulecolor=\color{codeborder},showstringspaces=false,breaklines=true,columns=fullflexible,keepspaces=true,tabsize=2}
+\newcommand{\role}[1]{\texttt{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\tableheader}[1]{{\normalfont\bfseries\fontsize{16pt}{18.4pt}\selectfont #1}}
+
+\begin{document}
+\begin{titlepage}
+  \thispagestyle{empty}\centering\vspace*{1.4in}
+  {\bfseries\fontsize{24pt}{30pt}\selectfont คู่มือพัฒนาระบบและคู่มือการใช้งาน\par}
+  \vspace{0.5cm}{\bfseries\fontsize{22pt}{28pt}\selectfont ระบบคำร้องขอลานิสิต\par}
+  \vspace{0.25cm}{\fontsize{19pt}{24pt}\selectfont คณะวิศวกรรมศาสตร์\par}
+  \vspace{2cm}{\fontsize{17pt}{22pt}\selectfont KUKPS Engineering Leave Request\par}
+  \vfill{\fontsize{16pt}{20pt}\selectfont ตรวจสอบระบบ ณ วันที่ 20 สิงหาคม 2569\par}\vspace{1in}
+\end{titlepage}
+\setcounter{page}{1}
+\renewcommand{\thepage}{\ifcase\value{page}\or ก\or ข\or ค\or ง\or จ\or ฉ\or ช\or ซ\or ฌ\or ญ\else\arabic{page}\fi}
+\begingroup
+\titleformat{name=\section,numberless}[block]{\centering\bfseries\fontsize{18pt}{22pt}\selectfont}{}{0pt}{}
+\tableofcontents
+\endgroup
+\clearpage
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+\input{sections/01_system_overview}\clearpage
+\input{sections/02_architecture}\clearpage
+\input{sections/03_installation}\clearpage
+\input{sections/04_development}\clearpage
+\input{sections/05_workflow}\clearpage
+\input{sections/06_student_manual}\clearpage
+\input{sections/07_approver_manual}\clearpage
+\input{sections/08_lecturer_admin_manual}\clearpage
+\input{sections/09_troubleshooting_security}
+\end{document}

@@ -1,0 +1,79 @@
+% !TeX root = ../main.tex
+\usepackage{fontspec}
+% Text width: 81 mm + 6 mm + 81 mm. Top margin is a project setting.
+\usepackage[a4paper,left=21mm,right=21mm,top=25mm,bottom=29mm]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{indentfirst}
+\usepackage{cite}
+\usepackage{balance}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{same}
+\setmainfont{Angsana New}[Script=Thai]
+\setsansfont{Angsana New}[Script=Thai]
+% Times-style mathematics complements the Latin letters in Angsana New.
+\setmathfont{texgyretermes-math.otf}
+\XeTeXlinebreaklocale "th"
+% Preserve original Thai Unicode when copying/searching shaped glyphs in the PDF.
+\XeTeXgenerateactualtext=1
+\XeTeXlinebreakskip=0pt plus 1pt
+\graphicspath{{images/}}
+\setlength{\columnsep}{6mm}
+\setlength{\parindent}{12.7mm}
+\setlength{\parskip}{0pt}
+\setlength{\textfloatsep}{16bp}
+\setlength{\dbltextfloatsep}{16bp}
+\setlength{\dblfloatsep}{16bp}
+\setlength{\intextsep}{16bp}
+\setlength{\emergencystretch}{3em}
+% Wide research diagrams and tables float at page tops in two-column mode.
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\dblfloatpagefraction}{0.75}
+% Number the report for reading/review; conference camera-ready rules may differ.
+\setlength{\footskip}{12mm}
+\pagestyle{plain}
+\renewcommand{\figurename}{รูปที่}
+\renewcommand{\tablename}{ตารางที่}
+\renewcommand{\refname}{เอกสารอ้างอิง}
+\renewcommand{\appendixname}{ภาคผนวก}
+\makeatletter
+\renewcommand{\normalsize}{\@setfontsize\normalsize{12bp}{16bp}}
+\makeatother
+\AtBeginDocument{\normalsize}
+% Keep both inline and display mathematics close to the body text's visual size.
+\DeclareMathSizes{12bp}{10bp}{7bp}{5bp}
+\titleformat{\section}{\fontsize{14bp}{16bp}\selectfont\bfseries\raggedright}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\fontsize{14bp}{16bp}\selectfont\bfseries\raggedright}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\fontsize{14bp}{16bp}\selectfont\bfseries\raggedright}{\thesubsubsection}{0.5em}{}
+\titlespacing{\section}{0pt}{16bp}{0pt}
+\titlespacing{\subsection}{0pt}{16bp}{0pt}
+\titlespacing{\subsubsection}{0pt}{16bp}{0pt}
+\DeclareCaptionFont{articlebody}{\fontsize{12bp}{16bp}\selectfont}
+\captionsetup{font=articlebody,labelsep=space,skip=0pt}
+\captionsetup[table]{position=top,justification=raggedright,singlelinecheck=false}
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\fontsize{16bp}{20bp}\selectfont\bfseries
+      \ArticleTitleTH\par
+      \ArticleTitleEN\par}
+    \vspace{16bp}
+    {\fontsize{12bp}{16bp}\selectfont\bfseries
+      \ArticleAuthor\par
+      \ArticleAffiliation\par}
+    \ArticleAddress\par % contact information awaits author confirmation
+
+  \end{center}
+  \vspace{16bp}
+}

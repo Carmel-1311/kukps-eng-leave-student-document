@@ -1,0 +1,55 @@
+\section{สถาปัตยกรรมและโครงสร้างโครงการ}
+\subsection{เทคโนโลยีหลัก}
+โครงการเป็น pnpm monorepo ประกอบด้วย \code{apps/web} ซึ่งใช้ Next.js 16, React 19, TypeScript, Tailwind CSS, Axios, React Hook Form และ Zod และ \code{apps/api} ซึ่งใช้ NestJS 11, Prisma 7 และ MariaDB/MySQL นอกจากนี้มี \code{template} สำหรับ SQL ตัวอย่าง และ \code{apps/api/postman} สำหรับชุดทดสอบ API
+
+\subsection{โครงสร้างไดเรกทอรี}
+\begin{lstlisting}
+kukps-eng-leave-request/
+|-- apps/
+|   |-- web/        # app, components, hooks, lib, types
+|   |-- api/        # src, prisma, postman, storage
+|-- template/       # mock SQL
+|-- package.json
+|-- pnpm-workspace.yaml
+\end{lstlisting}
+โมดูล backend แบ่งตามความรับผิดชอบ เช่น
+\begin{itemize}
+  \item บัญชีและผู้ใช้: \code{account}, \code{student} และ \code{subject}
+  \item คำร้อง: \code{leave-request}
+  \item การตั้งค่า: \code{academic-setting} และ \code{department-setting}
+  \item การอนุมัติอัตโนมัติ: \code{auto-approve-setting}
+  \item ข้อมูลประกอบ: \code{location} และ \code{personnel}
+  \item รายงาน: \code{warehouse-dashboard}
+  \item บริการภายนอก: \code{leave-request-component}
+\end{itemize}
+
+\newpage
+
+\subsection{ฐานข้อมูล}
+ระบบใช้ฐานข้อมูลสองแหล่ง ได้แก่
+\begin{itemize}
+  \item ฐานข้อมูลปฏิบัติการกำหนดด้วย \code{DATABASE\_URL}
+
+    ไฟล์ schema คือ \code{prisma/schema.prisma}
+  \item คลังข้อมูลกำหนดด้วย \code{WAREHOUSE\_DATABASE\_URL}
+
+    ไฟล์ schema คือ \code{prisma/warehouse.prisma}
+\end{itemize}
+ข้อมูลคำร้องอยู่ในฐานหลัก ส่วน dashboard และรายงานบางส่วนอ่านจากคลังข้อมูล
+
+\subsection{Authentication และ Authorization}
+Frontend เก็บ session ใน cookie ต่อไปนี้
+\begin{center}
+  \code{kukps\_eng\_leave\_session}
+\end{center}
+
+ระบบจำกัดสิทธิ์ของเส้นทางหลักดังนี้
+\begin{itemize}
+  \item \code{/student/**} สำหรับบทบาท \role{STUDENT}
+  \item \code{/admin-staff/**} สำหรับบทบาท \role{ADMIN\_STAFF}
+  \item \code{/user/**} สำหรับบัญชีที่มีอย่างน้อยหนึ่งบทบาทในกลุ่มบุคลากร
+\end{itemize}
+
+API client แนบ Bearer token ไปกับคำขอ ส่วน NestJS ใช้ \code{TokenAuthGuard} ตรวจ endpoint ที่ไม่ได้ประกาศเป็น public
+
+การป้องกันเส้นทางที่ frontend มีไว้สนับสนุนประสบการณ์ใช้งานเท่านั้น ทุก write endpoint ต้องตรวจ role และ ownership ที่ backend อีกครั้ง
