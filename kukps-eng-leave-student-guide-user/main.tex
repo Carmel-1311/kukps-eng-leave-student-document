@@ -1,0 +1,408 @@
+\documentclass[17pt,a4paper]{extreport}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{array}
+\setmainfont[Path=fonts/,BoldFont=THSarabun-Bold.ttf,ItalicFont=THSarabun-Italic.ttf,BoldItalicFont=THSarabun-BoldItalic.ttf]{THSarabun.ttf}
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip=0pt plus 1pt
+\emergencystretch=1em
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist{itemsep=2pt,topsep=3pt}
+\renewcommand{\contentsname}{สารบัญ}
+\titleformat{\chapter}{\filcenter\bfseries\fontsize{20pt}{24pt}\selectfont}{บทที่ \thechapter}{0.7em}{}
+\titleformat{\section}{\bfseries\fontsize{18pt}{22pt}\selectfont}{\thesection}{0.7em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{4pt}
+\titlespacing*{\section}{0pt}{10pt}{2pt}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,pdftitle={คู่มือผู้ใช้ระบบลานิสิต}}
+% อัปเดตหลัง merge origin/dev commit 9d622e4 วันที่ 9 ตุลาคม 2569
+% ใส่ไฟล์ภาพตามชื่อที่ระบุใน comment CAPTURE ใต้แต่ละหัวข้อ
+% ทุก route เติม prefix http://localhost:3000/kukps-eng-leave-student
+% {id} ใช้ ID จริงของคำร้องที่บัญชีเข้าถึงได้ ไม่ใช่รหัสนิสิต
+% ขั้นตอน Login ยังไม่รวมในคู่มือ รอเชื่อมต่อระบบภายนอก
+% หากยังไม่มีภาพ จะแสดงกรอบตำแหน่งภาพแทน เพื่อให้คู่มือยัง compile ได้
+% ภาพเต็มหน้าจอใช้หน้ากระดาษแนวนอนเพื่อให้อ่านรายละเอียดได้
+% ภาพหลายส่วนเรียงตามหมายเลขท้ายชื่อไฟล์ แต่ละส่วนมีหน้าของตนเอง
+\newcommand{\manualimage}[2]{%
+  \IfFileExists{images/#1}{%
+    \begin{landscape}
+      \thispagestyle{fancy}
+      \begin{center}
+        \includegraphics[width=\linewidth,height=13.8cm,keepaspectratio]{images/#1}
+        \par\small\textbf{#2}
+      \end{center}
+    \end{landscape}
+  }{%
+    \begin{center}
+      \fbox{\parbox{0.9\linewidth}{\centering\vspace{0.5cm}รอภาพประกอบ: #2\vspace{0.5cm}}}
+    \end{center}
+}}
+\begin{document}
+\begin{titlepage}
+  \centering\vspace*{3cm}
+  {\Huge\bfseries คู่มือผู้ใช้ระบบลานิสิต\par}
+  \vspace{0.8cm}{\Large คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเกษตรศาสตร์\par}
+  \vspace{0.4cm}{\large KUKPS Engineering Leave Request\par}
+  \vfill{\large สำหรับผู้ใช้ทุกบทบาท\par}\vspace{2cm}
+\end{titlepage}
+\tableofcontents\clearpage
+\chapter{การใช้งานตามบทบาท}
+ก่อนดำเนินการ ให้ตรวจชื่อบัญชีและบทบาทที่แสดงบนหน้าจอ บัญชีที่มีมากกว่าหนึ่งบทบาทอาจเห็นเมนูหลายกลุ่ม ให้เลือกเมนูตามงานที่ต้องทำ ระบบแสดงเมนูตามสิทธิ์ของบัญชี
+
+สำหรับนิสิต ให้ตรวจชื่อและรหัสนิสิตก่อนยื่นคำร้อง หากข้อมูลไม่ตรง ให้ติดต่อผู้ดูแลระบบก่อนดำเนินการ
+
+% ขั้นตอนเข้าสู่ระบบจะเพิ่มเติมภายหลังเมื่อเชื่อมต่อกับระบบภายนอกแล้ว
+
+\chapter{นิสิต}
+\section{ภาพรวมเมนู}
+เมนูของนิสิตประกอบด้วย \textbf{หน้าหลัก}, \textbf{ใบลาของฉัน}, \textbf{วิชาของฉัน}, \textbf{ช่องทางการติดต่อ} และ \textbf{รายงาน} บนหน้าจอขนาดเล็กให้ใช้เมนูที่ระบบแสดงสำหรับโทรศัพท์
+
+\begin{longtable}{>{\bfseries}p{0.27\textwidth}p{0.65\textwidth}}
+  เมนู & ใช้ทำอะไร\\\hline
+  หน้าหลัก & ดูข้อมูลนิสิต ภาพรวมคำร้อง รายการที่ต้องติดตาม และปุ่มยื่นใบลา\\
+  ใบลาของฉัน & ยื่นคำร้องใหม่ ดูสถานะและรายละเอียดคำร้อง เปิดเอกสารเมื่ออนุมัติครบ\\
+  วิชาของฉัน & เก็บรายวิชาและ SEC เป็นตัวเลือกช่วยกรอกใบลา\\
+  ช่องทางการติดต่อ & ตรวจและแก้ไขเบอร์โทรศัพท์กับที่อยู่\\
+  รายงาน & ดูข้อมูลสรุปและกราฟประวัติการลา\\
+\end{longtable}
+
+% CAPTURE: role=STUDENT; route=/student; image=images/student-home.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-home.png
+% หน้าจอ: หน้าหลักและเมนูนิสิต; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{student-home.png}{หน้าหลักและเมนูนิสิต}
+
+\section{เตรียมข้อมูลก่อนยื่นใบลา}
+ตรวจชื่อ รหัสนิสิต อาจารย์ที่ปรึกษา เบอร์โทรศัพท์ และที่อยู่ เตรียมเหตุผล ช่วงวันลา และรายวิชาที่ได้รับผลกระทบ หากลาป่วยต้องเตรียมหลักฐานเป็นไฟล์ JPG, JPEG, PNG, WEBP หรือ PDF ขนาดไม่เกิน 2 MB ส่วนลากิจเลือกแนบหลักฐานได้
+
+\section{เพิ่มรายวิชาในวิชาของฉัน}
+\begin{enumerate}
+  \item เปิด \textbf{วิชาของฉัน} แล้วค้นหาด้วยรหัสหรือชื่อรายวิชา
+  \item เลือก \textbf{SEC} และอาจารย์ผู้สอน จากนั้นกด \textbf{เพิ่ม}
+  \item ตรวจรายการวิชาที่บันทึกไว้ หากไม่ต้องการใช้รายการใด ให้กดลบและยืนยัน
+\end{enumerate}
+รายการนี้เป็นทางลัดสำหรับเลือกวิชาตอนยื่นใบลา ไม่ใช่รายการลงทะเบียนเรียนทั้งหมด และสามารถค้นหารายวิชาโดยตรงจากแบบฟอร์มยื่นคำร้องได้
+
+% CAPTURE: role=STUDENT; route=/student/my-class; image=images/student-my-class.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/my-class
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-my-class.png
+% หน้าจอ: ค้นหารายวิชา เลือก SEC และรายการวิชาที่เพิ่มแล้ว; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{student-my-class.png}{ค้นหารายวิชา เลือก SEC และรายการวิชาที่เพิ่มแล้ว}
+
+\section{ตรวจช่องทางการติดต่อ}
+เปิด \textbf{ช่องทางการติดต่อ} กรอกเบอร์โทรศัพท์และรายละเอียดที่อยู่ เลือกจังหวัด อำเภอหรือเขต ตำบลหรือแขวง และรหัสไปรษณีย์ตามลำดับ แล้วกดบันทึก ข้อมูลนี้ช่วยให้เลือกใช้เบอร์และที่อยู่จากระบบในแบบฟอร์มได้
+
+% CAPTURE: role=STUDENT; route=/student/contact; image=images/student-contact.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/contact
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-contact.png
+% หน้าจอ: แบบฟอร์มเบอร์โทรศัพท์และที่อยู่; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{student-contact.png}{แบบฟอร์มเบอร์โทรศัพท์และที่อยู่}
+
+\section{ยื่นคำร้องการลา}
+\begin{enumerate}
+  \item ที่ \textbf{หน้าหลัก} กด \textbf{ยื่นใบลา} หรือเปิด \textbf{ใบลาของฉัน} แล้วกด \textbf{ยื่นคำร้องใหม่}
+  \item ตรวจข้อมูลส่วนตัวที่ระบบแสดง เลือก \textbf{ลาป่วย} หรือ \textbf{ลากิจ} และกรอก \textbf{เหตุผลการลา}
+  \item แนบหลักฐานตามประเภทการลา ลาป่วยต้องแนบไฟล์ ส่วนลากิจให้เลือก \textbf{แนบหลักฐาน (ไม่บังคับ)} ก่อนแนบหากต้องการ
+  \item เลือก \textbf{วันที่เริ่มลา} และ \textbf{วันที่สิ้นสุด} โดยวันสิ้นสุดต้องไม่ก่อนวันเริ่ม ตรวจจำนวนวันทั้งหมด วันหยุด และจำนวนวันที่นับเป็นวันลา ระบบต้องนับเป็นวันลามากกว่า 0 วัน
+  \item ในส่วนข้อมูลติดต่อ เลือก \textbf{ใช้เบอร์จากระบบ} และ \textbf{ใช้ที่อยู่จากระบบ} หากข้อมูลถูกต้อง หากไม่ใช้ ให้กรอกเบอร์หรือที่อยู่ใหม่ และเลือกจังหวัด อำเภอหรือเขต ตำบลหรือแขวง และรหัสไปรษณีย์
+  \item ในส่วน \textbf{รายวิชาที่ได้รับผลกระทบ} เลือกรายวิชาจากรายการทางลัด หรือค้นหารายวิชา เลือก SEC แล้วกด \textbf{เพิ่ม} เลือกอย่างน้อยหนึ่งวิชา
+  \item สำหรับแต่ละวิชา เลือก \textbf{อาจารย์ผู้สอน} และตรวจวันกับเวลาเรียนที่ลา หากเวลาตามตารางไม่ตรง ให้ยกเลิก \textbf{เวลาตามตาราง} แล้วปรับวันที่และเวลา หรือกด \textbf{เพิ่มวัน} ให้ครบ
+  \item ตรวจทุกส่วน แล้วกด \textbf{บันทึกคำร้องการลา} หนึ่งครั้ง รอให้ระบบเปิดหน้ารายละเอียดคำร้องที่สร้าง
+\end{enumerate}
+หากระบบแจ้งว่าข้อมูลไม่ครบ ให้แก้ช่องที่มีข้อความผิดพลาดก่อนบันทึกอีกครั้ง หากบันทึกแล้วแต่ไม่แน่ใจผล ให้ตรวจ \textbf{ใบลาของฉัน} ก่อนสร้างคำร้องซ้ำ
+
+% CAPTURE: role=STUDENT; route=/student/my-leave-request/new; image=images/student-new-request.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/my-leave-request/new
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-new-request.png
+% หน้าจอ: แบบฟอร์มยื่นใบลาและรายวิชาที่ได้รับผลกระทบ; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/student-new-request-1.png
+\manualimage{student-new-request-1.png}{แบบฟอร์มยื่นใบลาและรายวิชาที่ได้รับผลกระทบ (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/student-new-request-2.png
+\manualimage{student-new-request-2.png}{แบบฟอร์มยื่นใบลาและรายวิชาที่ได้รับผลกระทบ (ส่วนที่ 2/2)}
+
+\section{ติดตามผลคำร้อง}
+เปิด \textbf{ใบลาของฉัน} ระบบแยกคำร้องเป็นสามแท็บ ได้แก่ \textbf{กำลังดำเนินการ} (อยู่ระหว่างพิจารณา), \textbf{เสร็จสิ้น} (อนุมัติครบ) และ \textbf{ไม่อนุมัติ} (ปฏิเสธหรือส่งกลับ) เลือกรายการเพื่อดูรายละเอียด ช่วงวันลา วิชาที่กระทบ และลำดับการพิจารณา หากคำร้องไม่ผ่าน ให้อ่านความเห็นของผู้พิจารณาในหน้ารายละเอียด
+
+% CAPTURE: role=STUDENT; route=/student/my-leave-request; image=images/student-requests.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/my-leave-request
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-requests.png
+% หน้าจอ: รายการใบลาและแท็บสถานะ; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{student-requests.png}{รายการใบลาและแท็บสถานะ}
+
+% CAPTURE: role=STUDENT; route=/student/my-leave-request/{id}; image=images/student-request-detail.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/my-leave-request/{id}
+% จับภาพ: เลือกคำร้องจริงที่แสดงรายละเอียดและจำนวนวันลา
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-request-detail.png
+\manualimage{student-request-detail.png}{รายละเอียดคำร้องและลำดับผู้พิจารณา}
+
+\section{เปิดและดาวน์โหลดเอกสาร}
+เมื่อคำร้องได้รับอนุมัติครบแล้ว ให้เปิดรายละเอียดคำร้อง แล้วกด \textbf{ดาวโหลดเอกสาร} หรือปุ่ม \textbf{เอกสาร} ในรายการ ระบบจะแสดงตัวอย่างใบลาและปุ่มส่งออก PDF สามารถบันทึกไฟล์หรือพิมพ์จาก PDF ได้ เอกสารอาจมีหน้าที่สองเมื่อมีรายวิชาจำนวนมาก
+
+% CAPTURE: role=STUDENT; route=/student/my-leave-request/{id}/document; image=images/student-document.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/my-leave-request/{id}/document
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-document.png
+% หน้าจอ: ตัวอย่างเอกสารของคำร้องที่อนุมัติครบ; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{student-document.png}{ตัวอย่างเอกสารของคำร้องที่อนุมัติครบ}
+
+\section{รายงานและการตั้งค่า}
+เมนู \textbf{รายงาน} แสดงภาพรวมจำนวนคำร้อง จำนวนวันลา แนวโน้มแต่ละเทอม และการลาแยกตามรายวิชา สามารถเลือกช่วงภาคการศึกษา ประเภทการลา ช่วงจำนวนวันลา และรายวิชาตามตัวกรองที่หน้าจอมีให้ ตารางรายงานที่มีหัวคอลัมน์เรียงลำดับสามารถกดหัวคอลัมน์เพื่อเปลี่ยนลำดับได้ \textbf{หมายเหตุ:} หน้ารายงานในโค้ดระบบปัจจุบันใช้ข้อมูลตัวอย่าง จึงไม่ควรนำตัวเลขไปอ้างอิงเป็นประวัติการลาจริง
+
+บนโทรศัพท์ หน้า \textbf{ตั้งค่า} ใช้เปลี่ยนโหมดสว่างหรือมืด เปิดจัดการช่องทางการติดต่อ และออกจากระบบ บนคอมพิวเตอร์สามารถเข้าถึงตัวเลือกบัญชีจากบริเวณแถบเมนู
+
+% CAPTURE: role=STUDENT; route=/student/report; image=images/student-report.png
+% URL: http://localhost:3000/kukps-eng-leave-student/student/report
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/student-report.png
+% หน้าจอ: ตัวกรองและกราฟรายงานข้อมูลจำลอง; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/student-report-1.png
+\manualimage{student-report-1.png}{ตัวกรองและกราฟรายงานข้อมูลจำลอง (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/student-report-2.png
+\manualimage{student-report-2.png}{ตัวกรองและกราฟรายงานข้อมูลจำลอง (ส่วนที่ 2/2)}
+
+\section{เมื่อพบปัญหา}
+หากไม่พบรายวิชา ให้ค้นหาด้วยรหัสหรือชื่อวิชาและตรวจ SEC หากข้อมูลส่วนตัวหรือเส้นทางพิจารณาไม่ถูกต้อง ให้ติดต่อเจ้าหน้าที่พร้อมรหัสนิสิตและเลขคำร้อง (ถ้ามี) เมื่อแจ้งปัญหา ให้ระบุขั้นตอน วันเวลา และข้อความผิดพลาด โดยไม่ส่งรหัสผ่านหรือข้อมูลการเข้าสู่ระบบ
+\chapter{อาจารย์ที่ปรึกษา}
+บทบาทนี้ใช้พิจารณาคำร้องของนิสิตในที่ปรึกษา และตรวจรายชื่อนิสิตที่รับผิดชอบ
+
+\section{ตรวจรายการรอพิจารณา}
+\begin{enumerate}
+  \item เปิด \textbf{การอนุมัติ / รับทราบ} แล้วเลือก \textbf{อาจารย์ที่ปรึกษา} จำนวนบนเมนูแสดงรายการที่กำลังรอในบทบาทนี้
+  \item ใช้ช่องค้นหาชื่อหรือรหัสนิสิต และตัวกรองบนหน้าเพื่อหารายการที่ต้องการ
+  \item เปิดคำร้อง ตรวจชื่อและรหัสนิสิต ประเภทและเหตุผลการลา ช่วงวัน จำนวนวัน หลักฐาน รายวิชาที่กระทบ และลำดับผู้พิจารณา
+  \item ในส่วน \textbf{บันทึกผลการพิจารณา} ปรับข้อความความคิดเห็นให้ตรงกับกรณี แล้วกด \textbf{อนุมัติ} หรือ \textbf{ไม่อนุมัติ} ตรวจข้อความในกล่องยืนยันก่อนกด \textbf{ยืนยัน}
+\end{enumerate}
+เมื่ออนุมัติ ระบบส่งคำร้องไปยังขั้นถัดไปตามเส้นทางที่แสดง หากไม่อนุมัติ คำร้องจะเปลี่ยนสถานะเป็นไม่ผ่าน ควรระบุเหตุผลที่นิสิตเข้าใจและนำไปดำเนินการต่อได้ ปุ่มพิจารณาปรากฏเฉพาะคำร้องที่ถึงขั้นของบัญชีนี้และยังไม่ถูกดำเนินการ
+
+% CAPTURE: role=ADVISOR; route=/user/approve-leave-request/as-advisor; image=images/advisor-queue.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approve-leave-request/as-advisor
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-queue.png
+% หน้าจอ: รายการรอพิจารณาของอาจารย์ที่ปรึกษา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{advisor-queue.png}{รายการรอพิจารณาของอาจารย์ที่ปรึกษา}
+
+% CAPTURE: role=ADVISOR; route=/user/approve-leave-request/as-advisor/{id}; image=images/advisor-approval.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approve-leave-request/as-advisor/{id}
+% จับภาพ: เลือกคำร้องถึงขั้นที่ปรึกษา จับภาพความเห็นและปุ่มพิจารณา
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-approval.png
+% ภาพต่อเนื่อง 1/2: images/advisor-approval-1.png
+\manualimage{advisor-approval-1.png}{รายละเอียดและปุ่มพิจารณาของอาจารย์ที่ปรึกษา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/advisor-approval-2.png
+\manualimage{advisor-approval-2.png}{รายละเอียดและปุ่มพิจารณาของอาจารย์ที่ปรึกษา (ส่วนที่ 2/2)}
+
+\section{นิสิตในที่ปรึกษาและประวัติ}
+เปิด \textbf{ข้อมูลของฉัน $>$ นิสิตในที่ปรึกษา} เพื่อค้นหาชื่อ รหัสนิสิต หลักสูตร หรือชั้นปี แล้วเลือกนิสิตเพื่อดูข้อมูลที่ระบบแสดง เปิด \textbf{ข้อมูลของฉัน $>$ ประวัติอนุมัติ} เพื่อตรวจผลที่เคยดำเนินการและเปิดรายละเอียดคำร้องเดิม
+
+% CAPTURE: role=ADVISOR; route=/user/my-student; image=images/advisor-students.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/my-student
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-students.png
+% หน้าจอ: รายชื่อนิสิตในที่ปรึกษา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{advisor-students.png}{รายชื่อนิสิตในที่ปรึกษา}
+
+% CAPTURE: role=ADVISOR; route=/user/approval-history; image=images/advisor-history.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approval-history
+% จับภาพ: รายการที่บัญชีนี้เคยพิจารณา
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-history.png
+\manualimage{advisor-history.png}{ประวัติการอนุมัติ}
+
+\section{รายงาน}
+เปิด \textbf{รายงาน} แล้วเลือก \textbf{รายงานสำหรับอาจารย์ที่ปรึกษา} เพื่อดูภาพรวมการลาของนิสิตในที่ปรึกษา หน้ารายงานในระบบปัจจุบันเป็นหน้าข้อมูลจำลองสำหรับตรวจรูปแบบการแสดงผล
+
+% CAPTURE: role=ADVISOR; route=/user/report/advisor; image=images/advisor-report.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/report/advisor
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-report.png
+% หน้าจอ: ตัวกรองและรายงานอาจารย์ที่ปรึกษา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/advisor-report-1.png
+\manualimage{advisor-report-1.png}{ตัวกรองและรายงานอาจารย์ที่ปรึกษา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/advisor-report-2.png
+\manualimage{advisor-report-2.png}{ตัวกรองและรายงานอาจารย์ที่ปรึกษา (ส่วนที่ 2/2)}
+
+\section{ตั้งค่าการอนุมัติอัตโนมัติของฉัน}
+เปิด \textbf{ตั้งค่า} แล้วดูส่วน \textbf{อนุมัติอัตโนมัติของฉัน} ระบบแสดงเฉพาะบทบาทพิจารณาที่บัญชีได้รับ เลือกเปิดหรือปิดการอนุมัติอัตโนมัติของบทบาทนั้น กำหนดระยะเวลาเป็นจำนวนเต็ม 1--365 วัน แล้วกด \textbf{บันทึก} หากต้องการอ่านค่าล่าสุด ให้กด \textbf{โหลดใหม่}
+
+การตั้งค่านี้เป็นของบัญชีและบทบาทของตนเอง ไม่ใช่ค่ารวมของอาจารย์ทุกคน ระบบใช้ค่าของผู้พิจารณาที่รับผิดชอบคำร้องในขั้นปัจจุบัน ควรตรวจค่าก่อนบันทึกตามนโยบายที่ได้รับมอบหมาย
+
+% CAPTURE: role=ADVISOR; route=/user/setting; image=images/advisor-auto-approve.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/setting
+% จับภาพ: ชื่อบัญชี บทบาท สวิตช์เปิด/ปิด จำนวนวัน ปุ่มบันทึก และโหลดใหม่ โดยไม่เปลี่ยนค่าจริงเพื่อ capture
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/advisor-auto-approve.png
+\manualimage{advisor-auto-approve.png}{การอนุมัติอัตโนมัติของฉัน — อาจารย์ที่ปรึกษา}
+
+\chapter{หัวหน้าภาควิชา}
+บทบาทนี้พิจารณาคำร้องหลังขั้นอาจารย์ที่ปรึกษา โดยเห็นเฉพาะรายการที่เข้าสู่ขั้นของหัวหน้าภาควิชา
+
+\section{พิจารณาคำร้อง}
+\begin{enumerate}
+  \item เปิด \textbf{การอนุมัติ / รับทราบ $>$ หัวหน้าภาควิชา} และเลือกแท็บหรือใช้ช่องค้นหาเพื่อหาคำร้อง
+  \item เปิดรายละเอียด ตรวจเหตุผลและหลักฐาน วันลา รายวิชา ผลพิจารณาของอาจารย์ที่ปรึกษา และข้อมูลผู้ยื่น
+  \item กรอกความคิดเห็น แล้วกด \textbf{อนุมัติ} หรือ \textbf{ไม่อนุมัติ} จากนั้นกด \textbf{ยืนยัน} ในกล่องข้อความ
+\end{enumerate}
+ระบบแสดงลำดับผู้อนุมัติของคำร้องแต่ละรายการ ให้ตรวจขั้นถัดไปจากหน้านี้ก่อนยืนยัน ตามเงื่อนไขระบบ คำร้องที่มีวันลามากกว่า 15 วันจะส่งต่อรองคณบดี ส่วนรายการที่ไม่ต้องมีขั้นถัดไปจะเสร็จสิ้นเมื่ออนุมัติครบ
+
+% CAPTURE: role=DEPARTMENT_HEAD; route=/user/approve-leave-request/as-dept-head/{id}; image=images/department-approval.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approve-leave-request/as-dept-head/{id}
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/department-approval.png
+% หน้าจอ: รายละเอียดและปุ่มพิจารณาของหัวหน้าภาควิชา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/department-approval-1.png
+\manualimage{department-approval-1.png}{รายละเอียดและปุ่มพิจารณาของหัวหน้าภาควิชา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/department-approval-2.png
+\manualimage{department-approval-2.png}{รายละเอียดและปุ่มพิจารณาของหัวหน้าภาควิชา (ส่วนที่ 2/2)}
+
+\section{ติดตามประวัติและรายงาน}
+เปิด \textbf{ข้อมูลของฉัน $>$ ประวัติอนุมัติ} เพื่อทบทวนผลย้อนหลัง เปิด \textbf{รายงาน $>$ รายงานสำหรับหัวหน้าภาควิชา} เพื่อดูแนวโน้มระดับภาควิชาและตัวกรองที่หน้าจอมีให้ หน้ารายงานนี้ใช้ข้อมูลจำลองในโค้ดระบบปัจจุบัน
+
+% CAPTURE: role=DEPARTMENT_HEAD; route=/user/report/department-head; image=images/department-report.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/report/department-head
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/department-report.png
+% หน้าจอ: รายงานหัวหน้าภาควิชา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/department-report-1.png
+\manualimage{department-report-1.png}{รายงานหัวหน้าภาควิชา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/department-report-2.png
+\manualimage{department-report-2.png}{รายงานหัวหน้าภาควิชา (ส่วนที่ 2/2)}
+
+\section{ตั้งค่าการอนุมัติอัตโนมัติของฉัน}
+เปิด \textbf{ตั้งค่า} แล้วดูส่วน \textbf{อนุมัติอัตโนมัติของฉัน} ระบบแสดงเฉพาะบทบาทพิจารณาที่บัญชีได้รับ เลือกเปิดหรือปิดการอนุมัติอัตโนมัติของบทบาทนั้น กำหนดระยะเวลาเป็นจำนวนเต็ม 1--365 วัน แล้วกด \textbf{บันทึก} หากต้องการอ่านค่าล่าสุด ให้กด \textbf{โหลดใหม่}
+
+การตั้งค่านี้เป็นของบัญชีและบทบาทของตนเอง ไม่ใช่ค่ารวมของอาจารย์ทุกคน ระบบใช้ค่าของผู้พิจารณาที่รับผิดชอบคำร้องในขั้นปัจจุบัน ควรตรวจค่าก่อนบันทึกตามนโยบายที่ได้รับมอบหมาย
+
+% CAPTURE: role=DEPARTMENT_HEAD; route=/user/setting; image=images/department-auto-approve.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/setting
+% จับภาพ: ชื่อบัญชี บทบาท สวิตช์เปิด/ปิด จำนวนวัน ปุ่มบันทึก และโหลดใหม่ โดยไม่เปลี่ยนค่าจริงเพื่อ capture
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/department-auto-approve.png
+\manualimage{department-auto-approve.png}{การอนุมัติอัตโนมัติของฉัน — หัวหน้าภาควิชา}
+
+\chapter{รองคณบดี}
+บทบาทรองคณบดีเป็นขั้นพิจารณาต่อจากหัวหน้าภาควิชาสำหรับคำร้องที่เข้าเงื่อนไขของระบบ
+
+\section{พิจารณาคำร้อง}
+\begin{enumerate}
+  \item เปิด \textbf{การอนุมัติ / รับทราบ $>$ รองคณบดีฯ} เพื่อดูรายการในความรับผิดชอบ
+  \item ค้นหาคำร้อง แล้วเปิดรายละเอียด ตรวจจำนวนวันลา หลักฐาน รายวิชา และผลของผู้พิจารณาก่อนหน้า
+  \item ระบุความคิดเห็น เลือก \textbf{อนุมัติ} หรือ \textbf{ไม่อนุมัติ} และยืนยันผล
+\end{enumerate}
+โดยปกติคำร้องที่มาถึงขั้นนี้มีจำนวนวันลามากกว่า 15 วัน เมื่ออนุมัติครบทุกขั้น คำร้องจะไปยังกลุ่ม \textbf{เสร็จสิ้น} และนิสิตเปิดเอกสารได้ หากไม่อนุมัติ คำร้องจะไปยังกลุ่ม \textbf{ไม่อนุมัติ}
+
+% CAPTURE: role=ASSOCIATE_DEAN; route=/user/approve-leave-request/as-associate-dean/{id}; image=images/dean-approval.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approve-leave-request/as-associate-dean/{id}
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/dean-approval.png
+% หน้าจอ: รายละเอียดและปุ่มพิจารณาของรองคณบดี; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/dean-approval-1.png
+\manualimage{dean-approval-1.png}{รายละเอียดและปุ่มพิจารณาของรองคณบดี (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/dean-approval-2.png
+\manualimage{dean-approval-2.png}{รายละเอียดและปุ่มพิจารณาของรองคณบดี (ส่วนที่ 2/2)}
+
+\section{ประวัติและรายงานผู้บริหาร}
+ใช้ \textbf{ข้อมูลของฉัน $>$ ประวัติอนุมัติ} ดูผลย้อนหลัง เมนู \textbf{รายงาน} มีหน้ารายงานสำหรับผู้บริหารระดับคณะ ซึ่งใช้ข้อมูลจำลองในโค้ดระบบปัจจุบัน
+
+% CAPTURE: role=ASSOCIATE_DEAN; route=/user/report/executive; image=images/dean-report.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/report/executive
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/dean-report.png
+% หน้าจอ: รายงานผู้บริหาร; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/3: images/dean-report-1.png
+\manualimage{dean-report-1.png}{รายงานผู้บริหาร (ส่วนที่ 1/3)}
+% ภาพต่อเนื่อง 2/3: images/dean-report-2.png
+\manualimage{dean-report-2.png}{รายงานผู้บริหาร (ส่วนที่ 2/3)}
+% ภาพต่อเนื่อง 3/3: images/dean-report-3.png
+\manualimage{dean-report-3.png}{รายงานผู้บริหาร (ส่วนที่ 3/3)}
+
+\section{ตั้งค่าการอนุมัติอัตโนมัติของฉัน}
+เปิด \textbf{ตั้งค่า} แล้วดูส่วน \textbf{อนุมัติอัตโนมัติของฉัน} ระบบแสดงเฉพาะบทบาทพิจารณาที่บัญชีได้รับ เลือกเปิดหรือปิดการอนุมัติอัตโนมัติของบทบาทนั้น กำหนดระยะเวลาเป็นจำนวนเต็ม 1--365 วัน แล้วกด \textbf{บันทึก} หากต้องการอ่านค่าล่าสุด ให้กด \textbf{โหลดใหม่}
+
+การตั้งค่านี้เป็นของบัญชีและบทบาทของตนเอง ไม่ใช่ค่ารวมของอาจารย์ทุกคน ระบบใช้ค่าของผู้พิจารณาที่รับผิดชอบคำร้องในขั้นปัจจุบัน ควรตรวจค่าก่อนบันทึกตามนโยบายที่ได้รับมอบหมาย
+
+% CAPTURE: role=ASSOCIATE_DEAN; route=/user/setting; image=images/dean-auto-approve.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/setting
+% จับภาพ: ชื่อบัญชี บทบาท สวิตช์เปิด/ปิด จำนวนวัน ปุ่มบันทึก และโหลดใหม่ โดยไม่เปลี่ยนค่าจริงเพื่อ capture
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/dean-auto-approve.png
+\manualimage{dean-auto-approve.png}{การอนุมัติอัตโนมัติของฉัน — รองคณบดี}
+
+\chapter{อาจารย์ประจำวิชา}
+บทบาทนี้ใช้รับทราบคำร้องที่เกี่ยวข้องกับรายวิชาที่สอน หลังคำร้องได้รับอนุมัติแล้ว ไม่ใช่ขั้นอนุมัติหลัก
+
+\section{ตรวจใบลาของนิสิตในวิชาที่สอน}
+\begin{enumerate}
+  \item เปิด \textbf{อาจารย์ประจำวิชา} ที่แถบเมนู จำนวนแจ้งเตือนแสดงรายการที่ยังไม่เปิดอ่าน
+  \item ค้นหาชื่อหรือรหัสนิสิต และใช้ตัวกรองรายวิชาที่สอนเพื่อจำกัดรายการ
+  \item เปิดคำร้อง ตรวจช่วงวันและเวลาเรียนที่ลา เหตุผล รายวิชาและ SEC รวมถึงข้อมูลประกอบ แล้วกลับไปยังรายการ
+\end{enumerate}
+ระบบบันทึกการเปิดอ่านรายการที่เกี่ยวข้องกับผู้สอน หากรายการไม่ปรากฏ ให้ตรวจรายวิชาและ SEC ในเมนู \textbf{ข้อมูลของฉัน $>$ วิชาที่สอน}
+
+% CAPTURE: role=LECTURER; route=/user/approved-request-my-class; image=images/lecturer-requests.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approved-request-my-class
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/lecturer-requests.png
+% หน้าจอ: ใบลาที่อนุมัติแล้วในวิชาที่สอน; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{lecturer-requests.png}{ใบลาที่อนุมัติแล้วในวิชาที่สอน}
+
+% CAPTURE: role=LECTURER; route=/user/approved-request-my-class/{id}; image=images/lecturer-request-detail.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/approved-request-my-class/{id}
+% จับภาพ: รายวิชา SEC และช่วงเวลาเรียนที่ลา การเปิดหน้าอาจบันทึกสถานะอ่าน
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/lecturer-request-detail.png
+\manualimage{lecturer-request-detail.png}{รายละเอียดใบลาในวิชาที่สอน}
+
+\section{วิชาที่สอนและรายงาน}
+เปิด \textbf{ข้อมูลของฉัน $>$ วิชาที่สอน} ค้นหารหัสหรือชื่อวิชา เลือกรายวิชาเพื่อดู SEC ที่สอน เมนู \textbf{รายงาน $>$ รายงานสำหรับอาจารย์ผู้สอน} ใช้ดูการลาแยกตามรายวิชา โดยหน้ารายงานปัจจุบันใช้ข้อมูลจำลอง
+
+% CAPTURE: role=LECTURER; route=/user/my-class; image=images/lecturer-classes.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/my-class
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/lecturer-classes.png
+% หน้าจอ: รายการวิชาที่สอนและ SEC; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{lecturer-classes.png}{รายการวิชาที่สอนและ SEC}
+
+% CAPTURE: role=LECTURER; route=/user/report/lecturer; image=images/lecturer-report.png
+% URL: http://localhost:3000/kukps-eng-leave-student/user/report/lecturer
+% จับภาพ: ตัวกรองและกราฟข้อมูลจำลอง
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/lecturer-report.png
+% ภาพต่อเนื่อง 1/2: images/lecturer-report-1.png
+\manualimage{lecturer-report-1.png}{รายงานอาจารย์ผู้สอน (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/lecturer-report-2.png
+\manualimage{lecturer-report-2.png}{รายงานอาจารย์ผู้สอน (ส่วนที่ 2/2)}
+
+\chapter{เจ้าหน้าที่ดูแลระบบ}
+บทบาทเจ้าหน้าที่ใช้ติดตามคำร้องและดูแลข้อมูลพื้นฐานที่ระบบนำไปใช้ขณะสร้างคำร้องและเส้นทางพิจารณา
+
+\section{รายการใบลาภาควิชา}
+เปิด \textbf{รายการใบลาภาควิชา} ค้นด้วยชื่อ รหัสนิสิต หรือเหตุผล และกรองตามชนิดใบลา ระยะเวลา หรือภาคการศึกษา เลือกแท็บสถานะแล้วเปิดคำร้องเพื่อตรวจข้อมูลผู้ยื่น หลักฐาน รายวิชา และขั้นอนุมัติ จำนวนแจ้งเตือนที่เมนูแสดงคำร้องที่รอดำเนินการ
+
+% CAPTURE: role=ADMIN; route=/admin-staff/department-leave-requests; image=images/admin-requests.png
+% URL: http://localhost:3000/kukps-eng-leave-student/admin-staff/department-leave-requests
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/admin-requests.png
+% หน้าจอ: รายการใบลาภาควิชาและตัวกรอง; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+\manualimage{admin-requests.png}{รายการใบลาภาควิชาและตัวกรอง}
+
+\section{จัดการปีการศึกษา}
+เปิด \textbf{จัดการปีการศึกษา} หน้าแบ่งเป็น \textbf{ภาคการศึกษาปัจจุบัน} และ \textbf{จัดการภาคการศึกษา} ตรวจหรือกำหนดภาคปัจจุบันในแท็บแรก ในแท็บรายการสามารถแก้ไขหรือลบภาคการศึกษาที่ระบบอนุญาตได้ ภาคที่มีใบลาอ้างอิงจะถูกล็อกและไม่สามารถแก้ไขได้ ตรวจปีและภาคก่อนกดบันทึก
+
+% CAPTURE: role=ADMIN; route=/admin-staff/academic-term-settings; image=images/admin-terms.png
+% URL: http://localhost:3000/kukps-eng-leave-student/admin-staff/academic-term-settings
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/admin-terms.png
+% หน้าจอ: ภาคการศึกษาปัจจุบันและรายการภาคการศึกษา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/admin-terms-1.png
+\manualimage{admin-terms-1.png}{ภาคการศึกษาปัจจุบันและรายการภาคการศึกษา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/admin-terms-2.png
+\manualimage{admin-terms-2.png}{ภาคการศึกษาปัจจุบันและรายการภาคการศึกษา (ส่วนที่ 2/2)}
+
+\section{จัดการคณะและสาขา}
+เปิด \textbf{จัดการคณะ/สาขา} เพื่อค้นหาคณะ ดูรายละเอียด เพิ่มคณะ หรือแก้ข้อมูลคณะ ภายในหน้ารายละเอียดสามารถเพิ่มและแก้สาขาได้ ควรตรวจรหัสและชื่อให้ตรงกับข้อมูลสถาบัน เพราะข้อมูลนี้เกี่ยวข้องกับนิสิตและเส้นทางพิจารณา ปุ่มลบถูกปิดเมื่อรายการมีข้อมูลอ้างอิง
+
+% CAPTURE: role=ADMIN; route=/admin-staff/department-settings; image=images/admin-departments.png
+% URL: http://localhost:3000/kukps-eng-leave-student/admin-staff/department-settings
+% วางไฟล์ภาพที่: C:/Users/winne/Desktop/document/guide-leave-student/images/admin-departments.png
+% หน้าจอ: รายการคณะและสาขา; แทน {id} ด้วย ID จริงจากรายการของบัญชีนี้
+% ภาพต่อเนื่อง 1/2: images/admin-departments-1.png
+\manualimage{admin-departments-1.png}{รายการคณะและสาขา (ส่วนที่ 1/2)}
+% ภาพต่อเนื่อง 2/2: images/admin-departments-2.png
+\manualimage{admin-departments-2.png}{รายการคณะและสาขา (ส่วนที่ 2/2)}
+
+\chapter{ข้อควรทราบร่วมกัน}
+\section{ลำดับการพิจารณา}
+คำร้องเริ่มที่อาจารย์ที่ปรึกษา ต่อด้วยหัวหน้าภาควิชา และต่อถึงรองคณบดีเมื่อจำนวนวันลาที่ระบบนับหลังหักวันหยุดมากกว่า 15 วัน โดยจำนวนวันตามปฏิทินอาจมากกว่าจำนวนวันลาที่นำไปพิจารณา ขั้นที่ยังไม่ถึงจะแสดงเป็นรอ ขั้นที่กำลังดำเนินการจึงแสดงปุ่มพิจารณา เมื่ออนุมัติครบ คำร้องเสร็จสิ้น หากไม่อนุมัติในขั้นใด คำร้องจะไม่เดินต่อ
+
+\section{ปุ่มดำเนินการไม่ปรากฏหรือข้อมูลไม่ตรง}
+ตรวจว่าเข้าด้วยบัญชีและบทบาทที่ถูกต้อง คำร้องถึงขั้นของตนแล้วหรือยัง และมีผู้ดำเนินการไปแล้วหรือไม่ หากยังผิดปกติ ให้แจ้งเจ้าหน้าที่โดยระบุเลขคำร้อง บทบาท วันเวลา และข้อความที่ระบบแสดง หลีกเลี่ยงการส่งรหัสผ่านหรือข้อมูลการเข้าสู่ระบบ
+\end{document}
