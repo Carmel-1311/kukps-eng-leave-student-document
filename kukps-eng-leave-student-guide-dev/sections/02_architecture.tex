@@ -1,6 +1,6 @@
 \section{สถาปัตยกรรมและโครงสร้างโครงการ}
 \subsection{เทคโนโลยีหลัก}
-โครงการเป็น pnpm monorepo ประกอบด้วย \code{apps/web} ซึ่งใช้ Next.js 16, React 19, TypeScript, Tailwind CSS, Axios, React Hook Form และ Zod และ \code{apps/api} ซึ่งใช้ NestJS 11, Prisma 7 และ MariaDB/MySQL นอกจากนี้มี \code{template} สำหรับ SQL ตัวอย่าง และ \code{apps/api/postman} สำหรับชุดทดสอบ API
+โครงการเป็น pnpm monorepo ประกอบด้วย \code{apps/web} ซึ่งใช้ Next.js 16, React 19, TypeScript, Tailwind CSS, Axios, React Hook Form และ Zod และ \code{apps/api} ซึ่งใช้ NestJS 11, Prisma 7 และ MariaDB/MySQL นอกจากนี้มี \code{docs/report-warehouse} สำหรับ schema, query, data-quality check และ runbook ของคลังข้อมูล และ \code{apps/api/postman} สำหรับชุดทดสอบ API
 
 \subsection{โครงสร้างไดเรกทอรี}
 \begin{lstlisting}
@@ -8,7 +8,9 @@ kukps-eng-leave-request/
 |-- apps/
 |   |-- web/        # app, components, hooks, lib, types
 |   |-- api/        # src, prisma, postman, storage
-|-- template/       # mock SQL
+|-- docs/report-warehouse/ # warehouse schema, queries, runbook
+|-- Dockerfile.web
+|-- Dockerfile.api
 |-- package.json
 |-- pnpm-workspace.yaml
 \end{lstlisting}
@@ -31,11 +33,17 @@ kukps-eng-leave-request/
   \item ฐานข้อมูลปฏิบัติการกำหนดด้วย \code{DATABASE\_URL}
 
     ไฟล์ schema คือ \code{prisma/schema.prisma}
-  \item คลังข้อมูลกำหนดด้วย \code{WAREHOUSE\_DATABASE\_URL}
-
-    ไฟล์ schema คือ \code{prisma/warehouse.prisma}
+  \item คลังข้อมูลรายงาน v2 กำหนดด้วย \code{WAREHOUSE\_V2\_DATABASE\_URL} และสร้างตาราง \code{dw\_*} จาก \code{docs/report-warehouse/01-schema.sql}
+  \item \code{WAREHOUSE\_DATABASE\_URL} และ \code{prisma/warehouse.prisma} เป็นส่วน legacy ไม่ใช่แหล่งข้อมูลของรายงานปัจจุบัน
 \end{itemize}
-ข้อมูลคำร้องอยู่ในฐานหลัก ส่วน dashboard และรายงานบางส่วนอ่านจากคลังข้อมูล
+ข้อมูลคำร้องอยู่ในฐานหลัก ส่วนรายงานปัจจุบันอ่านจากคลังข้อมูล v2 ผ่าน endpoint ต่อไปนี้
+\begin{center}
+  \code{/warehouse-dashboard/live/:report}
+\end{center}
+การนำเข้าข้อมูลใช้บัญชีต้นทางแบบอ่านอย่างเดียวใน \code{ETL\_SOURCE\_DATABASE\_URL} และบัญชีปลายทางใน
+\begin{center}
+  \code{WAREHOUSE\_V2\_DATABASE\_URL}
+\end{center}
 
 \subsection{Authentication และ Authorization}
 Frontend เก็บ session ใน cookie ต่อไปนี้

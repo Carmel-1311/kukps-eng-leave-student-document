@@ -1,24 +1,28 @@
 \section{การติดตั้งและตั้งค่าสภาพแวดล้อม}
 \subsection{สิ่งที่ต้องติดตั้ง}
-ต้องใช้ Node.js 20 ขึ้นไป, pnpm 10 และ MySQL หรือ MariaDB สองฐานข้อมูล
+ต้องใช้ Node.js 22, pnpm 10.0.0 และ MySQL หรือ MariaDB สำหรับฐานข้อมูลปฏิบัติการและคลังข้อมูลรายงาน
 \begin{lstlisting}
 corepack enable
 corepack prepare pnpm@10.0.0 --activate
-cd C:\Users\winne\Desktop\Web\kukps-eng-leave-request
-pnpm install
+cd <project-directory>\kukps-eng-leave-request
+pnpm install --frozen-lockfile
 \end{lstlisting}
 
 \subsection{การตั้งค่า API}
 สร้าง \code{apps/api/.env} ดังตัวอย่าง
 \begin{lstlisting}
-DATABASE_URL="mysql://user:password@host:3306/kukps-eng-leave-request-db"
-WAREHOUSE_DATABASE_URL="mysql://user:password@host:3306/kukps-eng-leave-request-wh"
+DATABASE_URL="mysql://user:password@host:3306/operational_db"
+ETL_SOURCE_DATABASE_URL="mysql://readonly:password@host:3306/operational_db"
+WAREHOUSE_V2_DATABASE_URL="mysql://writer:password@host:3306/warehouse_db"
+WAREHOUSE_ETL_TARGET_DATABASE=kukps-eng-leave-request-wh
 PORT=3001
 API_BASE_PATH=/kukps-eng-leave-request-api
+CORS_ORIGIN=http://localhost:3000
 \end{lstlisting}
 ตัวแปรเพิ่มเติมที่ใช้ตามสภาพแวดล้อม ได้แก่
 \begin{itemize}
   \item \code{ALL\_LOGIN\_API\_URL}: บริการเข้าสู่ระบบและตรวจ token
+  \item \code{EXTERNAL\_AUTH\_API\_URL} และ \code{AUTH\_SYSTEM\_ID}: บริการตรวจ role และรหัสระบบ
   \item \code{PERSONNEL\_API\_URL}: บริการข้อมูลบุคลากรและสิทธิ์
   \item \code{LEAVE\_REQUEST\_COMPONENT\_API\_URL}: บริการข้อมูลรายวิชาและอาจารย์
   \item \code{PUBLIC\_LEAVE\_REQUEST\_TOKEN\_SECRET}: secret สำหรับ public token ซึ่งต้องตั้งใน production
@@ -26,6 +30,7 @@ API_BASE_PATH=/kukps-eng-leave-request-api
   \item \code{BASE\_STORAGE\_PATH}: ตำแหน่งเก็บหลักฐาน
   \item \code{AUTO\_APPROVE\_RUN\_AT}: เวลารันงานอนุมัติอัตโนมัติ
   \item \code{FAKE\_TOKEN}: token สำหรับการพัฒนาเท่านั้น
+  \item \code{ROLE\_TEST}: ต้องเป็น \code{false} ในระบบที่นำขึ้นใช้งานจริง
 \end{itemize}
 
 \newpage
@@ -33,22 +38,36 @@ API_BASE_PATH=/kukps-eng-leave-request-api
 \subsection{การตั้งค่า Web}
 สร้าง \code{apps/web/.env.local}
 \begin{lstlisting}
-NEXT_PUBLIC_API_URL=http://127.0.0.1:3001/kukps-eng-leave-request-api
+AUTH_SERVICE_URL=https://eng.kps.ku.ac.th/std-eng-auth-service
+AUTH_SYSTEM_ID=lss
+AUTH_SESSION_SECRET=replace-with-a-long-random-secret
+API_URL=http://localhost:3001/kukps-eng-leave-request-api
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_BASE_PATH=/kukps-eng-leave-request
+ROLE_TEST=false
 \end{lstlisting}
-ห้ามใส่ข้อมูลลับจริงในตัวแปรต่อไปนี้ เพราะค่าถูกส่งไปยัง browser \code{NEXT\_PUBLIC\_*}
+สร้างค่า \code{AUTH\_SESSION\_SECRET} และ public-token secret แบบสุ่มแยกกัน โดยชื่อของตัวแปรหลังคือ
+\begin{center}
+  \code{PUBLIC\_LEAVE\_REQUEST\_TOKEN\_SECRET}
+\end{center}
+ห้ามใส่ข้อมูลลับในตัวแปร \code{NEXT\_PUBLIC\_*} เพราะค่าจะถูกส่งไปยัง browser หากติดตั้งใต้ subpath จึงค่อยเพิ่ม \code{NEXT\_PUBLIC\_BASE\_PATH}
 
 \subsection{ฐานข้อมูลและ Prisma}
 \begin{lstlisting}
-pnpm --filter api exec prisma db pull --schema prisma/schema.prisma
-pnpm --filter api exec prisma db pull --schema prisma/warehouse.prisma
+pnpm --filter api exec prisma migrate deploy
 pnpm --filter api generate
 \end{lstlisting}
-ต้องระบุไฟล์ schema เสมอ ห้ามใช้เพียง \code{--schema prisma} ข้อมูลตัวอย่างแยกเป็นสองไฟล์ ได้แก่
+สำหรับฐานข้อมูลเดิม ต้องสำรองข้อมูลและตรวจ migration history ก่อนใช้คำสั่งข้างต้น ห้ามใช้ \code{prisma db pull} เป็นขั้นตอนติดตั้งทั่วไป เพราะอาจทำให้ schema ใน source code เปลี่ยนตามฐานข้อมูลปลายทาง
+
+คลังข้อมูล v2 ไม่ได้สร้างด้วย Prisma ให้ดำเนินการตาม warehouse runbook ที่
+\begin{center}
+  \path{docs/report-warehouse/05-etl-runbook.md}
+\end{center}
+โดยสรุปดังนี้
 \begin{itemize}
-  \item \code{template/mock\_data.sql}: ข้อมูลตัวอย่างของฐานข้อมูลหลัก
-  \item \code{template/mock\_warehouse\_data.sql}: ข้อมูลตัวอย่างของคลังข้อมูล
+  \item สร้างตารางด้วย \code{docs/report-warehouse/01-schema.sql}
+  \item กำหนดบัญชีต้นทางแบบ SELECT-only และบัญชีคลังข้อมูลแบบจำกัดสิทธิ์
+  \item ทดสอบด้วย \code{pnpm --filter api warehouse:etl:test}
+  \item เรียก \code{pnpm --filter api warehouse:etl:refresh} ตามรอบที่กำหนดหลังตรวจ data quality
 \end{itemize}
 
 \subsection{การรัน}
@@ -61,7 +80,7 @@ pnpm dev:api
 \begin{itemize}
   \item Web
 
-    \code{http://localhost:3000/kukps-eng-leave-request-web}
+    \code{http://localhost:3000}
   \item API
 
     \code{http://localhost:3001/kukps-eng-leave-request-api}

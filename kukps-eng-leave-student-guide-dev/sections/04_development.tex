@@ -29,8 +29,8 @@ Backend ควรพัฒนาตามลำดับ DTO, service, controlle
     GET & /leave-request/:id/document & อ่านข้อมูลเอกสาร \\
     GET & /leave-request/public/:token & อ่านข้อมูลผ่าน signed token \\
     GET, PUT & /academic-setting/* & จัดการภาคการศึกษา \\
-    GET, PUT & /auto-approve-setting/rules/* & จัดการกฎอนุมัติอัตโนมัติ \\
-    GET & /warehouse-dashboard/* & อ่านข้อมูลรายงาน \\\bottomrule
+    GET, PUT & /auto-approve-setting/rules & จัดการกฎอนุมัติอัตโนมัติ \\
+    GET & /warehouse-dashboard/live/:report & อ่านรายงานปัจจุบัน \\\bottomrule
   \end{tabularx}
   \caption{API ในกระบวนการหลัก (ต่อ)}
 \end{table}
@@ -48,9 +48,11 @@ pnpm lint
 pnpm build
 pnpm build:web
 pnpm build:api
-docker build -f apps/web/Dockerfile -t kukps-eng-leave-request-web .
-docker build -f apps/api/Dockerfile -t kukps-eng-leave-request-api .
+pnpm --filter api test:security
+pnpm --filter api warehouse:etl:test
+docker build -f Dockerfile.web -t kukps-eng-leave-request-web .
+docker build -f Dockerfile.api -t kukps-eng-leave-request-api .
 \end{lstlisting}
 ควรทดสอบ login และ route ของทุก role, กระบวนการ create--approve/reject--lecturer read และไฟล์ JPG, JPEG, PNG, WEBP, PDF ทั้งกรณีผ่านและเกิน 2 MB ระบบไม่มี Docker Compose จึง deploy web, API และฐานข้อมูลแยกกัน
 
-API source ปัจจุบันตั้ง CORS เป็น wildcard แม้ README เดิมกล่าวถึง \code{CORS\_ORIGIN} ใน production ควรแก้ \code{apps/api/src/main.ts} ให้จำกัด origin ที่อนุญาต
+API จำกัด origin ด้วย \code{CORS\_ORIGIN} ซึ่งรับหลาย origin แบบคั่นด้วย comma ใน production ต้องระบุเฉพาะ web origin ที่อนุญาต ห้ามใช้ wildcard และต้องตั้ง \code{ROLE\_TEST=false}
