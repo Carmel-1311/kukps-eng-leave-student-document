@@ -20,16 +20,16 @@ GET & /leave-request/:id/approval-flow & อ่านขั้นอนุมั
   \caption{API ในกระบวนการหลัก}
 \end{table}
 
-\begin{table}[H]\centering
-  \begin{tabularx}{\textwidth}{|>{\ttfamily\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}p{2cm}|>{\ttfamily\fontsize{12pt}{15pt}\selectfont\raggedright\arraybackslash}p{8cm}|X|}\hline
-    \tableheader{Method} & \tableheader{Path} & \tableheader{หน้าที่} \\\hline
-    POST & /leave-request/:id/review & อนุมัติหรือไม่อนุมัติ \\\hline
-POST & /leave-request/:id/lecturer-read & บันทึกการอ่านของอาจารย์ \\\hline
-GET & /leave-request/:id/document & อ่านข้อมูลเอกสาร \\\hline
-GET & /leave-request/public/:token & อ่านข้อมูลผ่าน signed token \\\hline
-GET, PUT & /academic-setting/* & จัดการภาคการศึกษา \\\hline
-GET, PUT & /auto-approve-setting/rules & จัดการกฎอนุมัติอัตโนมัติ \\\hline
-GET & /warehouse-dashboard/live/:report & อ่านรายงานปัจจุบัน \\\hline
+\begin{table}[htbp]\centering
+  \begin{tabularx}{\textwidth}{>{\ttfamily\fontsize{13pt}{16pt}\selectfont\raggedright\arraybackslash}p{2cm} >{\ttfamily\fontsize{12pt}{15pt}\selectfont\raggedright\arraybackslash}p{9cm} X}\toprule
+    \tableheader{Method} & \tableheader{Path} & \tableheader{หน้าที่} \\\midrule
+    POST & /leave-request/:id/review & อนุมัติหรือไม่อนุมัติ \\
+    POST & /leave-request/:id/lecturer-read & บันทึกการอ่านของอาจารย์ \\
+    GET & /leave-request/:id/document & อ่านข้อมูลเอกสาร \\
+    GET & /leave-request/public/:token & อ่านข้อมูลผ่าน signed token \\
+    GET, PUT & /academic-setting/* & จัดการภาคการศึกษา \\
+    GET, PUT & /auto-approve-setting/rules & จัดการกฎอนุมัติอัตโนมัติ \\
+    GET & /warehouse-dashboard/live/:report & อ่านรายงานปัจจุบัน \\\bottomrule
   \end{tabularx}
   \caption{API ในกระบวนการหลัก (ต่อ)}
 \end{table}
