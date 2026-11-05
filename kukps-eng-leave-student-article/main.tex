@@ -1,4 +1,4 @@
-% !TeX program = xelatex
+% Build using the project recipe in .vscode/settings.json.
 \documentclass[12pt,a4paper]{article}
 \input{styles/article}
 \input{metadata}
@@ -17,6 +17,9 @@
 \clearpage
 \onecolumn
 \setcounter{page}{1}
-\renewcommand{\thepage}{\ifcase\value{page}\or ก\or ข\or ค\or ง\or จ\or ฉ\or ช\or ซ\or ฌ\or ญ\or ฎ\or ฏ\or ฐ\or ฑ\or ฒ\or ณ\or ด\or ต\or ถ\or ท\or ธ\or น\or บ\or ป\or ผ\or ฝ\or พ\or ฟ\or ภ\or ม\or ย\or ร\or ล\or ว\or ศ\or ษ\or ส\or ห\or ฬ\or อ\or ฮ\fi}
+\renewcommand{\thepage}{\ifcase\value{page}\or ก\or ข\or ค\or ง\or
+  จ\or ฉ\or ช\or ซ\or ฌ\or ญ\or ฎ\or ฏ\or ฐ\or ฑ\or ฒ\or ณ\or ด\or ต\or
+  ถ\or ท\or ธ\or น\or บ\or ป\or ผ\or ฝ\or พ\or ฟ\or ภ\or ม\or ย\or ร\or
+ล\or ว\or ศ\or ษ\or ส\or ห\or ฬ\or อ\or ฮ\fi}
 \input{sections/08-appendix}
 \end{document}
