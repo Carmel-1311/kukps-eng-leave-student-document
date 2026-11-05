@@ -1,3 +1,14 @@
+## แก้ปัญหา build ด้วย pdfLaTeX (5 พฤศจิกายน 2569)
+
+บทความนี้ต้องใช้ **XeLaTeX** เพราะใช้ `fontspec` และคำสั่ง XeTeX สำหรับภาษาไทย การใช้ `pdflatex` จะหยุดด้วย `fontspec cannot-use-pdftex`.
+
+- เปิด repo `kukps-eng-leave-student-document` หรือเปิดโฟลเดอร์บทความใน VS Code แล้วใช้ **LaTeX Workshop: Build with recipe** เลือกสูตร XeLaTeX (การตั้งค่า `.vscode` ของโฟลเดอร์ลูกไม่ถูกโหลดเมื่อเปิด repo แม่)
+- จากโฟลเดอร์บทความ รัน `latexmk main.tex`; `.latexmkrc` เลือก XeLaTeX และเก็บผลใน `build/main.pdf`
+- จาก repo แม่ รัน `latexmk -cd -xelatex -outdir=build kukps-eng-leave-student-article/main.tex` หรือใช้สคริปต์ `./kukps-eng-leave-student-article/scripts/build.ps1`
+- หากยังมีผลจาก build ที่ล้มเหลว ใช้ `latexmk -g main.tex` จากโฟลเดอร์บทความเพื่อบังคับ build ใหม่
+
+ข้อความ `security risk: running with elevated privileges` แยกจากข้อผิดพลาด engine: ปิด VS Code/terminal ที่เปิดแบบ Administrator แล้วเปิดใหม่ด้วยสิทธิ์ผู้ใช้ปกติ ส่วนข้อความยังไม่ตรวจ MiKTeX updates ให้เปิด MiKTeX Console แบบผู้ใช้ปกติและตรวจ Updates.
+
 ## รูปแบบเนื้อหาฉบับปัจจุบัน
 
 บทความหลัก 6 หน้า เน้นแนวคิดการทำงานของระบบ ตัดวันที่ตรวจข้อมูลและรายละเอียดชื่อฟิลด์/คำสั่งออกจากคำอธิบาย โดยใช้การเก็บตารางเรียน วันเรียน ผู้สอน และลำดับพิจารณาเป็นหลัก ภาคผนวกยังเก็บแผนภาพฐานข้อมูลสำหรับอ้างอิง PDF รวม 23 หน้า (บทความ 6 หน้า หน้าลงนาม 1 หน้า และภาคผนวก 16 หน้า) ข้อมูลจำนวนหน้าในบันทึกก่อนหน้านี้เป็นประวัติฉบับเดิม
